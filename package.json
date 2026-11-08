@@ -1,0 +1,20 @@
+{
+  "name": "ada-atelier-design-architecture",
+  "private": true,
+  "type": "module",
+  "description": "Site de l'Atelier Design Architecture (Nathalie Guerin), reconstruit hors Webflow",
+  "scripts": {
+    "build": "eleventy && pagefind --site _site --output-subdir _pagefind --force-language fr",
+    "dev": "eleventy --serve --port 8080",
+    "serve": "node scripts/serve.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.8",
+    "markdown-it": "^14.3.3",
+    "pagefind": "^1.6.0",
+    "sharp": "^0.35.5"
+  }
+}

@@ -1,0 +1,175 @@
+{# Menu de la page de recherche (composant Webflow « Menu Navbar Statique »). #}
+<div data-pagefind-ignore="all" class="navigation-wrap-2 menu-static">
+  <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navigation w-nav">
+    <div class="navigation-full-2">
+      <div class="navigation-container">
+        <div class="navigation-left-3">
+          <a href="/"{% actif "/" %} class="brand-3 w-nav-brand{% classeActive "/" %}">
+            <img width="250" sizes="(max-width: 991px) 100vw, 250px" alt="" src="/images/site/67250e83595e212f0cfca65b_ada-logo-fond-noir-2-2024.jpg" loading="lazy" srcset="/images/variantes/67250e83595e212f0cfca65b_ada-logo-fond-noir-2-2024-p-500.jpg 500w, /images/variantes/67250e83595e212f0cfca65b_ada-logo-fond-noir-2-2024-p-800.jpg 800w, /images/variantes/67250e83595e212f0cfca65b_ada-logo-fond-noir-2-2024-p-1080.jpg 1080w, /images/variantes/67250e83595e212f0cfca65b_ada-logo-fond-noir-2-2024-p-1600.jpg 1600w, /images/variantes/67250e83595e212f0cfca65b_ada-logo-fond-noir-2-2024-p-2000.jpg 2000w, /images/site/67250e83595e212f0cfca65b_ada-logo-fond-noir-2-2024.jpg 2201w" class="global-logo-3"/>
+          </a>
+          <nav role="navigation" class="nav-menu-6 w-nav-menu">
+            <a href="/nathalie-guerin"{% actif "/nathalie-guerin" %} class="navigation-link-2 w-nav-link{% classeActive "/nathalie-guerin" %}">Nathalie GUERIN</a>
+            <div data-delay="150" data-hover="false" class="dropdown-7 w-dropdown">
+              <div class="dropdown-toggle-11 w-dropdown-toggle">
+                <div class="drop-arrow-plain w-icon-dropdown-toggle"></div>
+                <div class="text-block-8">Architecture</div>
+              </div>
+              <nav class="dropdown-list-10 w-dropdown-list">
+                <div class="dropdown-list-full-wrapper-3">
+                  <div class="navigation-drop-container-3">
+                    <div class="navigation-column">
+                      <a href="/projets"{% actif "/projets" %} class="navigation-link-block w-inline-block{% classeActive "/projets" %}">
+                        <div class="nav-content-wrap">
+                          <div class="nav-title-2">Habitat Collectif</div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="navigation-column">
+                      <a href="/habitat-groupe"{% actif "/habitat-groupe" %} class="navigation-link-block w-inline-block{% classeActive "/habitat-groupe" %}">
+                        <div class="nav-content-wrap">
+                          <div class="nav-title-2">Habitat Groupé<br/>‍</div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="navigation-column">
+                      <a href="/habitat-individuel"{% actif "/habitat-individuel" %} class="navigation-link-block w-inline-block{% classeActive "/habitat-individuel" %}">
+                        <div class="nav-content-wrap">
+                          <div class="nav-title-2">Habitat Individuel</div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="navigation-column">
+                      <a href="/bureau-architecture"{% actif "/bureau-architecture" %} class="navigation-link-block w-inline-block{% classeActive "/bureau-architecture" %}">
+                        <div class="nav-content-wrap">
+                          <div class="nav-title-2">Bureaux</div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </nav>
+            </div>
+            <div data-delay="150" data-hover="false" class="dropdown-7 w-dropdown">
+              <div class="dropdown-toggle-11 w-dropdown-toggle">
+                <div class="drop-arrow-plain w-icon-dropdown-toggle"></div>
+                <div class="text-block-8">Design</div>
+              </div>
+              <nav class="dropdown-list-10 w-dropdown-list">
+                <div class="dropdown-list-full-wrapper-3">
+                  <div class="navigation-drop-container-3">
+                    <div class="navigation-column">
+                      <a href="/bureau-design"{% actif "/bureau-design" %} class="navigation-link-block w-inline-block{% classeActive "/bureau-design" %}">
+                        <div class="nav-content-wrap">
+                          <div class="nav-title-2">Bureaux</div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="navigation-column">
+                      <a href="/entree-dimmeuble"{% actif "/entree-dimmeuble" %} class="navigation-link-block w-inline-block{% classeActive "/entree-dimmeuble" %}">
+                        <div class="nav-content-wrap">
+                          <div class="nav-title-2">Entrée d&#x27;immeuble</div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="navigation-column">
+                      <a href="/residence-etudiante"{% actif "/residence-etudiante" %} class="navigation-link-block w-inline-block{% classeActive "/residence-etudiante" %}">
+                        <div class="nav-content-wrap">
+                          <div class="nav-title-2">Résidence étudiante</div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="navigation-column">
+                      <a href="#" class="navigation-link-block w-inline-block">
+                        <div class="nav-content-wrap"></div>
+                      </a>
+                    </div>
+                    <div class="navigation-column">
+                      <a href="#" class="navigation-link-block w-inline-block">
+                        <div class="nav-content-wrap"></div>
+                      </a>
+                    </div>
+                    <div class="navigation-column">
+                      <a href="#" class="navigation-link-block w-inline-block">
+                        <div class="nav-content-wrap"></div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </nav>
+            </div>
+            <a href="/contact"{% actif "/contact" %} class="navigation-link-2 w-nav-link{% classeActive "/contact" %}">Contact</a>
+          </nav>
+          <form action="/search" class="ths01-search w-form">
+            <input class="ths01-search-input w-input" maxlength="256" name="query" placeholder="Recherche" type="search" id="search" required=""/>
+            <input type="submit" class="ths01-search-button w-button" value=""/>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease-out" data-easing2="ease-out" role="banner" class="navigation-mob-2 w-nav">
+    <div class="navigation-container-mob">
+      <a href="/"{% actif "/" %} class="brand-4 w-nav-brand{% classeActive "/" %}">
+        <img width="Auto" sizes="(max-width: 479px) 62vw, (max-width: 991px) 250px, 100vw" alt="" src="/images/site/67250e83595e212f0cfca65b_ada-logo-fond-noir-2-2024.jpg" srcset="/images/variantes/67250e83595e212f0cfca65b_ada-logo-fond-noir-2-2024-p-500.jpg 500w, /images/variantes/67250e83595e212f0cfca65b_ada-logo-fond-noir-2-2024-p-800.jpg 800w, /images/variantes/67250e83595e212f0cfca65b_ada-logo-fond-noir-2-2024-p-1080.jpg 1080w, /images/variantes/67250e83595e212f0cfca65b_ada-logo-fond-noir-2-2024-p-1600.jpg 1600w, /images/variantes/67250e83595e212f0cfca65b_ada-logo-fond-noir-2-2024-p-2000.jpg 2000w, /images/site/67250e83595e212f0cfca65b_ada-logo-fond-noir-2-2024.jpg 2201w" class="flowbase-logo-3"/>
+      </a>
+      <nav role="navigation" class="mobile-nav-2 w-nav-menu">
+        <a href="#" class="mobile-nav-link-3 w-nav-link">Nathalie Guerin</a>
+        <div data-delay="0" data-hover="false" class="mobile-dropdown w-dropdown">
+          <div class="mobile-toggle w-dropdown-toggle">
+            <div class="icon-9 w-icon-dropdown-toggle"></div>
+            <div class="text-block-11">Architecture</div>
+          </div>
+          <nav class="dropdown-list-mob w-dropdown-list">
+            <a href="/projets"{% actif "/projets" %} class="navigation-link-block-mob w-inline-block{% classeActive "/projets" %}">
+              <div class="nav-content-wrap">
+                <div class="nav-title-2">Habitat Collectif</div>
+              </div>
+            </a>
+            <a href="/habitat-groupe"{% actif "/habitat-groupe" %} class="navigation-link-block-mob w-inline-block{% classeActive "/habitat-groupe" %}">
+              <div class="nav-content-wrap">
+                <div class="nav-title-2">Habitat Groupé</div>
+              </div>
+            </a>
+            <a href="/habitat-individuel"{% actif "/habitat-individuel" %} class="navigation-link-block-mob w-inline-block{% classeActive "/habitat-individuel" %}">
+              <div class="nav-content-wrap">
+                <div class="nav-title-2">Habitat Individuel</div>
+              </div>
+            </a>
+            <a href="/habitat-individuel"{% actif "/habitat-individuel" %} class="navigation-link-block-mob w-inline-block{% classeActive "/habitat-individuel" %}">
+              <div class="nav-content-wrap">
+                <div class="nav-title-2">Hôtel</div>
+              </div>
+            </a>
+            <a href="/bureau-architecture"{% actif "/bureau-architecture" %} class="navigation-link-block-mob w-inline-block{% classeActive "/bureau-architecture" %}">
+              <div class="nav-content-wrap">
+                <div class="nav-title-2">Bureau</div>
+              </div>
+            </a>
+          </nav>
+        </div>
+        <div data-delay="0" data-hover="false" class="mobile-dropdown w-dropdown">
+          <div class="mobile-toggle w-dropdown-toggle">
+            <div class="icon-10 w-icon-dropdown-toggle"></div>
+            <div class="text-block-10">Design</div>
+          </div>
+          <nav class="dropdown-list-mob w-dropdown-list">
+            <a href="/bureau-design"{% actif "/bureau-design" %} class="navigation-link-block-mob w-inline-block{% classeActive "/bureau-design" %}">
+              <div class="nav-content-wrap">
+                <div class="nav-title-2">Bureau</div>
+              </div>
+            </a>
+            <a href="/bureau-design"{% actif "/bureau-design" %} class="navigation-link-block-mob w-inline-block{% classeActive "/bureau-design" %}">
+              <div class="nav-content-wrap">
+                <div class="nav-title-2">Entrée d&#x27;Immeuble</div>
+              </div>
+            </a>
+          </nav>
+        </div>
+        <a href="#" class="mobile-nav-link-3 w-nav-link">Contact</a>
+      </nav>
+      <div class="menu-mob-2 w-nav-button">
+        <div class="icon w-icon-nav-menu"></div>
+      </div>
+    </div>
+  </div>
+</div>

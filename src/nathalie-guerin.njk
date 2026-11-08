@@ -1,0 +1,59 @@
+---
+permalink: nathalie-guerin.html
+layout: base.njk
+wfPage: 6714fe6be716bcdd2fb1a542
+titre: Nathalie Guérin - Architecte
+meta:
+  - <meta content="Apprenez-en plus sur Nathalie Guérin, architecte passionnée par l&#x27;innovation dans l&#x27;urbanisme et le design, au service de projets résidentiels et professionnels." name="description">
+  - <meta content="Nathalie Guérin - Architecte" property="og:title">
+  - <meta content="Apprenez-en plus sur Nathalie Guérin, architecte passionnée par l&#x27;innovation dans l&#x27;urbanisme et le design, au service de projets résidentiels et professionnels." property="og:description">
+  - <meta content="Nathalie Guérin - Architecte" property="twitter:title">
+  - <meta content="Apprenez-en plus sur Nathalie Guérin, architecte passionnée par l&#x27;innovation dans l&#x27;urbanisme et le design, au service de projets résidentiels et professionnels." property="twitter:description">
+  - <meta property="og:type" content="website">
+  - <meta content="summary_large_image" name="twitter:card">
+classeBody: body-8
+---
+{% include "composants/menu-principal.njk" %}
+<section class="main-section">
+  <section class="section-marge"></section>
+  <div class="columns-3 w-row">
+    <div class="column-6 w-col w-col-6">
+      <div class="collection-list-wrapper-5 w-dyn-list">
+        {% if collaborateurs.length %}
+        <div role="list" class="w-dyn-items">
+          {% for c in collaborateurs %}
+          <div role="listitem" class="collection-item-5 w-dyn-item">
+            <div style="background-image:url(&quot;{{ c.photo }}&quot;)" class="div-block-18"></div>
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <div class="w-dyn-empty" data-pagefind-ignore>
+          <div>No items found.</div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    <div class="column-5 w-col w-col-6">
+      <div class="w-dyn-list">
+        {% if collaborateurs.length %}
+        <div role="list" class="w-dyn-items">
+          {% for c in collaborateurs %}
+          <div role="listitem" class="w-dyn-item">
+            <div class="div-block-19">
+              <h1 class="heading-24">{{ c.nom }}</h1>
+              <div class="rich-text-block-4 w-richtext">{{ c.description | texteRiche | safe }}</div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <div class="w-dyn-empty" data-pagefind-ignore>
+          <div>No items found.</div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% include "composants/pied-de-page.njk" %}

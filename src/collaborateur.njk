@@ -1,0 +1,15 @@
+---js
+{
+  pagination: { data: "collaborateurs", size: 1, alias: "collaborateur" },
+  permalink: (data) => `collaborateurs/${data.collaborateur.slug}.html`,
+  layout: "base.njk",
+  wfPage: "67141497c0dc2d4f1f2fb03d",
+  wfCollection: "67141497c0dc2d4f1f2fb01f",
+  horsRecherche: true,
+  eleventyComputed: {
+    wfItemSlug: (data) => data.collaborateur.slug,
+    titre: (data) => data.collaborateur.nom,
+  },
+}
+---
+{#- Gabarit « Collaborateurs Template » de Webflow : la page existe mais n'a jamais reçu de contenu. -#}

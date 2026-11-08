@@ -1,0 +1,50 @@
+---js
+{
+  pagination: { data: "categories", size: 1, alias: "categorie" },
+  permalink: (data) => `${data.categorie.slug}.html`,
+  layout: "base.njk",
+  classeBody: "body",
+  eleventyComputed: {
+    wfPage: (data) => data.categorie.wfPage,
+    titre: (data) => data.categorie.titre,
+    meta: (data) => data.categorie.meta,
+  },
+}
+---
+{#- Les 7 pages catégories (Habitat Collectif, Habitat Groupé…) : liste des projets de la catégorie,
+    dans l'ordre de Webflow (voir le filtre projetsDe dans eleventy.config.js). -#}
+{% set liste = projets | projetsDe(categorie.type, categorie.tri) %}
+{% include "composants/menu-principal.njk" %}
+<section class="heading-section">
+  <h3 class="heading-7">{{ categorie.intitule }}</h3>
+</section>
+<div class="collection-list-wrapper w-dyn-list" data-pagefind-ignore="all">
+  {% if liste.length %}
+  <div role="list" class="collection-list w-dyn-items w-row">
+    {% for projet in liste %}
+    <div role="listitem" class="collection-item w-dyn-item w-col w-col-6">
+      <a data-w-id="6bc692e7-bb14-18cb-9da8-9b7bd1074a17" style="background-image:url(&quot;{{ projet.couverture | fond(2000) }}&quot;)" href="/projets/{{ projet.slug }}" class="div-block project-container w-inline-block">
+        {% if categorie.image %}
+        {% set variantes = projet.couverture | srcset %}
+        {% if variantes %}
+        <img src="{{ projet.couverture }}" loading="lazy" alt="" sizes="(max-width: 479px) 100vw, (max-width: 767px) 99vw, (max-width: 1439px) 49vw, 50vw" srcset="{{ variantes }}" class="image-cover">
+        {% else %}
+        <img src="{{ projet.couverture }}" loading="lazy" alt="" class="image-cover">
+        {% endif %}
+        {% endif %}
+        <div class="div-block-texts flip-text">
+          <h3 class="heading{% if not projet.nom %} w-dyn-bind-empty{% endif %}">{{ projet.nom }}</h3>
+          <h5 class="heading-2{% if not projet.localisation %} w-dyn-bind-empty{% endif %}">{{ projet.localisation }}</h5>
+        </div>
+        <div class="div_border_animation"></div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="w-dyn-empty" data-pagefind-ignore>
+    <div>No items found.</div>
+  </div>
+  {% endif %}
+</div>
+{% include "composants/pied-de-page.njk" %}

@@ -1,0 +1,5 @@
+# Règles Netlify. Les adresses restent celles de Webflow (sans « .html ») : Netlify sert
+# « /contact » à partir de contact.html sans règle particulière.
+# « /projets » est à la fois une page (Habitat Collectif) et le dossier des fiches projet :
+# on indique explicitement quelle page servir.
+/projets    /projets.html    200!

@@ -1,0 +1,32 @@
+---
+permalink: search.html
+layout: base.njk
+wfPage: 6717e0d442df6d9b4099ecf1
+titre: Search Results
+meta:
+  - <meta content="Search Results" property="og:title">
+  - <meta content="Search Results" name="twitter:title">
+horsRecherche: true
+scriptsFin:
+  - <script src="/js/recherche.js" type="text/javascript"></script>
+---
+{#- Page de résultats de la recherche. Webflow calculait les résultats sur son serveur ;
+    ici, recherche.js les cherche dans l'index Pagefind créé à la construction du site
+    et les affiche avec le même balisage (titre, adresse, description).
+    Le menu et la barre du bas sont ceux des autres pages (le menu propre à cette page, sur Webflow,
+    débordait de l'écran et menait à des pages absentes). -#}
+{% include "composants/menu-principal.njk" %}
+<div class="w-container page-recherche">
+  <h1>Résultats de la recherche</h1>
+  <form action="/search" class="w-form" role="search">
+    <label for="champ-recherche">Recherche</label>
+    <input class="w-input" maxlength="256" name="query" placeholder="Chercher..." type="search" id="champ-recherche" required="">
+    <input type="submit" class="w-button" value="Rechercher">
+  </form>
+  <div data-resultats>
+    <div>
+      <div>Aucun résultat.</div>
+    </div>
+  </div>
+</div>
+{% include "composants/pied-de-page.njk" %}

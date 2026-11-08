@@ -1,0 +1,104 @@
+# Interface d'administration du site (adresse : /admin).
+# Chaque enregistrement crée un commit dans le dépôt GitHub du site ; Netlify reconstruit
+# alors le site et le met en ligne en une à deux minutes.
+# L'interface s'affiche dans la langue du navigateur.
+# Connexion : bouton « Se connecter avec un jeton d'accès » (jeton GitHub avec le droit « Contents : lecture et écriture »
+# sur ce seul dépôt), ou compte GitHub si l'application OAuth est déclarée dans Netlify.
+# En local (npm run serve puis http://localhost:8080/admin), « Travailler avec un dépôt local »
+# modifie directement les fichiers du dossier site.
+backend:
+  name: github
+  repo: AlexandreHaharfi/ada-atelier-design-architecture
+  branch: main
+  commit_messages:
+    create: "Ajout : {{collection}} « {{slug}} »"
+    update: "Modification : {{collection}} « {{slug}} »"
+    delete: "Suppression : {{collection}} « {{slug}} »"
+    uploadMedia: "Ajout de l'image {{path}}"
+    deleteMedia: "Suppression de l'image {{path}}"
+
+site_url: https://www.ada-atelier-design-architecture.fr
+display_url: https://www.ada-atelier-design-architecture.fr
+logo:
+  src: /images/site/6727cf5bdd9b588ebe6b0f92_ada-favicon-256x256.png
+
+# Images des projets : enregistrées dans src/images/projets, publiées sous /images/projets.
+# Les versions réduites (500 à 3200 px) sont créées automatiquement à la construction du site.
+media_folder: src/images/projets
+public_folder: /images/projets
+
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: "-"
+
+collections:
+  - name: projets
+    label: Projets
+    label_singular: Projet
+    description: >-
+      Chaque projet a sa page (/projets/nom-du-projet) et apparaît dans la page de sa catégorie.
+      Dans une catégorie, les projets sont classés par « Ordre d'affichage » croissant ; les projets sans numéro
+      passent en premier, du plus ancien au plus récent. Exception : « Bureau (Design) », classé du plus récent au plus ancien.
+    folder: src/content/projets
+    format: json
+    extension: json
+    create: true
+    delete: true
+    slug: "{{nom}}"
+    identifier_field: nom
+    summary: "{{nom}} ({{type}})"
+    sortable_fields: [nom, type, ordre, cree_le]
+    view_groups:
+      - { label: Catégorie, field: type }
+    preview_path: "projets/{{slug}}"
+    fields:
+      - { label: Nom du projet, name: nom, widget: string }
+      - { label: Localisation, name: localisation, widget: string, required: false, hint: "Exemple : Valras, France" }
+      - label: Catégorie
+        name: type
+        widget: select
+        options:
+          - { label: Habitat Collectif, value: Habitat Collectif }
+          - { label: Habitat Groupé, value: Habitat Groupé }
+          - { label: Habitat Individuel, value: Habitat Individuel }
+          - { label: Bureau (Architecture), value: Bureau (Architecture) }
+          - { label: Bureau (Design), value: Bureau (Design) }
+          - { label: Entrée d'immeuble, value: Entrée d'immeuble }
+          - { label: Résidence étudiante, value: Résidence étudiante }
+      - { label: Ordre d'affichage, name: ordre, widget: number, value_type: int, required: false, hint: "1 = premier de la catégorie. Laisser vide pour placer le projet en tête." }
+      - { label: Date du projet, name: date, widget: datetime, required: false, format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+      - { label: Image de couverture, name: couverture, widget: image, hint: "Image de la vignette dans la page de catégorie." }
+      - label: Photos du diaporama
+        name: photos
+        widget: list
+        hint: "Dans l'ordre d'affichage. Elles apparaissent aussi en vignettes sous le diaporama."
+        field: { label: Photo, name: photo, widget: image }
+      - label: Informations
+        name: informations
+        widget: markdown
+        required: false
+        buttons: [bold, italic, link]
+        editor_components: []
+        hint: "Une ligne par information, intitulé en gras, comme sur les autres projets."
+        default: "**Programme**  : \n\n**Statut**  : \n\n**Superficie** : \n\n**Maitrise d'Ouvrage** : \n\n**Maitrise d'Oeuvre :** Nathalie GUERIN - ADA\n\n**Photographe** : \n\n‍"
+      - { label: Date de création, name: cree_le, widget: datetime, hint: "Remplie automatiquement ; sert à départager les projets de même ordre." }
+      - { label: Masquer le projet, name: brouillon, widget: boolean, required: false, default: false, hint: "Le projet reste enregistré mais n'apparaît plus sur le site." }
+
+  - name: collaborateurs
+    label: Page Nathalie Guerin
+    label_singular: Portrait
+    description: Photo et présentation de la page « Nathalie Guerin ».
+    folder: src/content/collaborateurs
+    format: json
+    extension: json
+    create: false
+    delete: false
+    identifier_field: nom
+    media_folder: /src/images/equipe
+    public_folder: /images/equipe
+    fields:
+      - { label: Nom, name: nom, widget: string }
+      - { label: Photo, name: photo, widget: image }
+      - { label: Présentation, name: description, widget: markdown, buttons: [bold, italic, link], editor_components: [] }
+      - { label: Date de création, name: cree_le, widget: datetime }

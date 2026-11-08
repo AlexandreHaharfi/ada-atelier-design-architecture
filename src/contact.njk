@@ -1,0 +1,60 @@
+---
+permalink: contact.html
+layout: base.njk
+wfPage: 670a79081f26174c9f344a6f
+titre: Contactez Nathalie Guérin, Architecte | Prenez Rendez-vous
+meta:
+  - <meta content="Besoin d&#x27;un architecte pour vos projets résidentiels ou professionnels ? Contactez Nathalie Guerin pour discuter de vos besoins et découvrir des solutions sur mesure." name="description">
+  - <meta content="Contactez Nathalie Guérin, Architecte | Prenez Rendez-vous" property="og:title">
+  - <meta content="Besoin d&#x27;un architecte pour vos projets résidentiels ou professionnels ? Contactez Nathalie Guerin pour discuter de vos besoins et découvrir des solutions sur mesure." property="og:description">
+  - <meta content="Contactez Nathalie Guérin, Architecte | Prenez Rendez-vous" property="twitter:title">
+  - <meta content="Besoin d&#x27;un architecte pour vos projets résidentiels ou professionnels ? Contactez Nathalie Guerin pour discuter de vos besoins et découvrir des solutions sur mesure." property="twitter:description">
+  - <meta property="og:type" content="website">
+  - <meta content="summary_large_image" name="twitter:card">
+scriptsFin:
+  - <script src="/js/formulaire.js" type="text/javascript"></script>
+---
+{#- Le formulaire est envoyé à Netlify Forms (qui transmet chaque message par e-mail) au lieu de Webflow.
+    formulaire.js garde le comportement de Webflow : message « Merci ! » sans changer de page. -#}
+{% include "composants/menu-principal.njk" %}
+<section class="section-18"></section>
+<section class="contact-section">
+  <h1 class="heading-14">CONTACTEZ-NOUS</h1>
+  <div class="div-block-13"></div>
+  <div class="columns-2 w-row">
+    <div class="column-2 colomn-cntact w-col w-col-6">
+      <div class="w-form">
+        <form id="email-form" name="email-form" data-name="Email Form" method="post" action="/contact" data-netlify="true" netlify-honeypot="bot-field" data-wf-page-id="670a79081f26174c9f344a6f" data-wf-element-id="4c86a3d2-c901-d7e7-566f-ad012d1f875f">
+          <input type="hidden" name="form-name" value="email-form">
+          <div style="display:none"><label>Ne pas remplir : <input name="bot-field" tabindex="-1" autocomplete="off"></label></div>
+          <label for="Nom" class="field-label">Nom: *</label>
+          <input class="w-input" maxlength="256" name="Nom" data-name="Nom" placeholder="" type="text" id="Nom">
+          <label for="email" class="field-label-2">Email: *</label>
+          <input class="w-input" maxlength="256" name="email" data-name="Email" placeholder="" type="email" id="email" required="">
+          <label for="Numero" class="field-label-3">Téléphone: </label>
+          <input class="w-input" maxlength="256" name="Numero" data-name="Numero" placeholder="" type="text" id="Numero">
+          <label for="Demande" class="field-label-6">Tapez votre demande ici *</label>
+          <textarea id="Demande" name="Demande" maxlength="5000" data-name="Demande" placeholder="" required="" class="w-input"></textarea>
+          <input type="submit" data-wait="Patientez..." class="submit-button-2 w-button" value="ENVOYER">
+        </form>
+        <div class="w-form-done">
+          <div>Merci! Votre message a bien été envoyé. </div>
+        </div>
+        <div class="w-form-fail">
+          <div>Oops! Une erreur est survenue lors de l&#x27;envoie du formulaire. Veuillez réessayer plus tard. </div>
+        </div>
+      </div>
+    </div>
+    <div class="column-3 w-col w-col-6">
+      <h4 class="heading-15">Contact</h4>
+      <p class="paragraph-2">Nathalie GUERIN - ADA<br><strong>Téléphone</strong> : <a href="tel:+33622812008">06 22 81 20 08</a><br><strong>Mail</strong> : <a href="mailto:guerinnat@wanadoo.fr">guerinnat@wanadoo.fr</a></p>
+      <h4 class="heading-15">Adresse</h4>
+      <p class="paragraph-2">Centre d’affaire Audace <br>1366 Av. des Platanes, <br>34970 Lattes</p>
+      <div class="code-embed w-embed w-iframe">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2890.0287556446274!2d3.919615076258072!3d43.585117371105376!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12b6a5414de46723%3A0x2bd072356234d8ab!2s1366%20Av.%20des%20Platanes%2C%2034970%20Lattes!5e0!3m2!1sfr!2sfr!4v1729624367238!5m2!1sfr!2sfr" width="350" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="div-margin"></div>
+{% include "composants/pied-de-page-statique.njk" %}

@@ -1,0 +1,469 @@
+/* Retouches de présentation et d'adaptation aux écrans (novembre 2026).
+
+   La feuille de Webflow (webflow.css) reste intacte : ce fichier, chargé après elle, corrige ce qui
+   gênait la lecture sur le site d'origine (textes de 9 à 14 px, menu qui débordait entre 992 et
+   1 300 px de large, barre du bas qui recouvrait le formulaire de contact, photos de l'accueil réduites
+   à une bande sur téléphone, carte et champs qui sortaient de l'écran) et règle l'affichage du
+   téléphone au très grand écran. Une section par élément du site, dans l'ordre des pages. */
+
+
+/* ---------- Repères communs ----------
+   --u est l'unité des tailles sur ordinateur : 1 px jusqu'à 1 440 px de large ; au-delà, elle grandit
+   avec l'écran (selon sa largeur et sa hauteur, la plus petite des deux comptant) jusqu'à 1,5 px. Sur un
+   grand écran, ou avec un zoom réduit, barres, textes et photos gardent ainsi les proportions d'un écran
+   d'ordinateur portable au lieu de rapetisser au milieu de la page (voir « Grands écrans », à la fin). */
+
+:root {
+  --u: 1px;
+  --menu-h: calc(68 * var(--u)); /* hauteur du menu, filet du bas compris (61 px sur Webflow) */
+  --pied-h: calc(52 * var(--u)); /* hauteur de la barre du bas */
+  --marge: 40px;                 /* marge latérale des pages */
+}
+@media (min-width: 1440px) {
+  :root {
+    --u: clamp(1px, min(calc(.25px + .052083vw), calc(.25px + .09375vh)), 1.5px);
+    --marge: calc(50 * var(--u));
+  }
+}
+@media (min-width: 992px) and (max-width: 1279px) { :root { --marge: 24px; } }
+@media (max-width: 991px) { :root { --menu-h: 72px; --marge: 32px; } }
+@media (max-width: 767px) { :root { --pied-h: 44px; --marge: 20px; } }
+@media (max-width: 479px) { :root { --menu-h: 64px; } }
+
+/* Pas d'agrandissement automatique du texte quand on tourne le téléphone. */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+/* Page en colonne : la barre du bas reste en bas de l'écran même quand la page est courte. */
+body { display: flex; flex-direction: column; min-height: 100vh; min-height: 100svh; }
+body > * { flex-shrink: 0; }
+body > .footer-bottom-contact-static, body > .section-footer { margin-top: auto; }
+
+/* Flèches des diaporamas, plus discrètes sur téléphone. */
+@media (max-width: 767px) {
+  .w-slider-arrow-left, .w-slider-arrow-right { width: 48px; font-size: 28px; }
+}
+
+
+/* ---------- Menu, ordinateur (à partir de 992 px) ----------
+   Sur Webflow, le logo débordait de 44 px et la recherche était écrasée sous 1 300 px de large.
+   Logo à gauche, recherche à droite (deux blocs de même largeur), rubriques centrées entre les deux. */
+
+.navigation-2 { padding-left: var(--marge); padding-right: var(--marge); }
+.navigation-container-2 { min-height: calc(var(--menu-h) - 1px); } /* la barre fait la hauteur du repère */
+.navigation-left-4 { flex: none; width: calc(250 * var(--u)); }
+.brand-6 { margin-right: 0; }
+.navigation-2 .flowbase-logo-4 { display: block; width: calc(250 * var(--u)); max-width: 100%; height: auto; }
+.nav-menu-9 { grid-column-gap: calc(22 * var(--u)); padding-left: calc(24 * var(--u)); padding-right: calc(24 * var(--u)); font-size: calc(15 * var(--u)); line-height: calc(20 * var(--u)); }
+/* Le filet du survol ne fait plus bouger le menu ; la flèche des listes est masquée, d'où des marges égales. */
+.navigation-link-3, .navigation-link-3:hover { padding: calc(10 * var(--u)) calc(12 * var(--u)); border-bottom: 1px solid transparent; font-size: calc(15 * var(--u)); }
+.navigation-link-3:hover, .navigation-link-3.w--current { border-bottom-color: #fff; }
+.dropdown-toggle-12 { padding: calc(10 * var(--u)) calc(12 * var(--u)); }
+/* Listes déroulantes Architecture et Design. */
+.navigation-dropdown.w--open { min-width: calc(250 * var(--u)); left: calc(-30 * var(--u)); }
+.dropdown-link-1 { padding: calc(20 * var(--u)) calc(22 * var(--u)) calc(10 * var(--u)); }
+.dropdown-link-2, .dropdown-link-11, .dropdown-link-12 { padding: calc(10 * var(--u)) calc(22 * var(--u)); }
+.navigation-dropdown .nav-content-wrap-2 { padding-left: calc(20 * var(--u)); }
+.text-block-61, .text-block-67, .nav-link-title { font-size: calc(14 * var(--u)); line-height: calc(20 * var(--u)); }
+.ths01-search { flex: none; justify-content: flex-end; width: calc(250 * var(--u)); margin: 0; }
+.ths01-search-input { flex: none; width: calc(200 * var(--u)); height: calc(36 * var(--u)); padding: 0 calc(40 * var(--u)) 0 calc(16 * var(--u)); border-color: #ffffff1f; border-radius: 999px; font-size: calc(14 * var(--u)); line-height: calc(20 * var(--u)); }
+.ths01-search-input:focus { border-color: #ffffff59; }
+.ths01-search-button { top: calc(7 * var(--u)); right: calc(7 * var(--u)); width: calc(22 * var(--u)); height: calc(22 * var(--u)); background-size: calc(15 * var(--u)) calc(15 * var(--u)); }
+
+@media (min-width: 992px) and (max-width: 1279px) {
+  .navigation-left-4, .navigation-2 .flowbase-logo-4 { width: 200px; }
+  .nav-menu-9 { grid-column-gap: 4px; padding-left: 16px; padding-right: 16px; }
+  .navigation-link-3, .navigation-link-3:hover, .dropdown-toggle-12 { padding-left: 10px; padding-right: 10px; }
+  .ths01-search { width: 200px; }
+  .ths01-search-input { width: 160px; }
+}
+
+
+/* ---------- Menu, tablette et téléphone (jusqu'à 991 px) ----------
+   Le logo de 250 px et le bouton du menu dépassaient de l'écran sous 340 px ; les rubriques étaient
+   en Arial 14 px, et la rubrique de la page ouverte en bleu. */
+
+.recherche-mobile { display: none; }
+
+@media (max-width: 991px) {
+  .navigation-mob-3 { height: var(--menu-h); padding-left: var(--marge); padding-right: calc(var(--marge) - 12px); }
+  .navigation-mob-3 .w-nav-brand { padding-left: 0; }
+  .navigation-mob-3 .flowbase-logo-4 { display: block; width: 210px; max-width: calc(100vw - 120px); height: auto; }
+  .menu-mob-3 { padding: 12px; }
+
+  .mobile-nav-3 { padding: 8px 0 20px; border-bottom: 1px solid #ffffff14; }
+  .mobile-nav-link, .mobile-toggle-2 { padding: 14px var(--marge); font-family: Lato, sans-serif; font-size: 17px; line-height: 24px; color: #fff; }
+  .mobile-nav-link.w--current { color: #fff; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; }
+  .mobile-toggle-2 .w-icon-dropdown-toggle { margin-right: var(--marge); }
+  .dropdown-link-mobile { padding: 12px var(--marge) 12px calc(var(--marge) + 16px); }
+  .dropdown-link-mobile .nav-content-wrap-2 { padding-left: 0; }
+  .dropdown-link-mobile .nav-link-details-2, .dropdown-link-mobile .text-block-61 { font-family: Lato, sans-serif; font-size: 16px; line-height: 22px; color: #ffffffb3; }
+  .dropdown-link-mobile.w--current .nav-link-details-2, .dropdown-link-mobile.w--current .text-block-61,
+  .dropdown-link-mobile:hover .nav-link-details-2, .dropdown-link-mobile:hover .text-block-61 { color: #fff; }
+
+  /* Recherche dans le menu (le site d'origine n'en proposait pas sur tablette et téléphone). */
+  .recherche-mobile { display: block; position: relative; margin: 12px var(--marge) 0; }
+  .recherche-mobile-champ { display: block; width: 100%; height: 44px; margin: 0; padding: 0 48px 0 16px; border: 1px solid #ffffff2e; border-radius: 22px; background-color: #0e0e0e; color: #fff; font-family: Lato, sans-serif; font-size: 16px; line-height: 20px; -webkit-appearance: none; appearance: none; }
+  .recherche-mobile-champ::placeholder { color: #a0989b; }
+  .recherche-mobile-champ:focus { border-color: #ffffff66; outline: 0; }
+  .recherche-mobile .ths01-search-button { top: 4px; right: 4px; width: 36px; height: 36px; background-size: 16px 16px; }
+}
+@media (max-width: 479px) {
+  .navigation-mob-3 .flowbase-logo-4 { width: 180px; }
+  .dropdown-link-mobile { padding-top: 11px; padding-bottom: 11px; }
+}
+
+
+/* ---------- Accueil : diaporama plein écran ----------
+   Sur Webflow, les photos étaient posées en haut d'un écran noir (une simple bande sur téléphone) et la
+   page dépassait de l'écran. Le diaporama occupe maintenant l'espace entre le menu et la barre du bas,
+   les photos remplissent le cadre et un léger dégradé garde le titre lisible. */
+
+.slider-3 {
+  height: calc(100vh - var(--menu-h) - var(--pied-h));
+  height: calc(100svh - var(--menu-h) - var(--pied-h));
+  min-height: 240px; /* téléphone tenu en largeur : la page tient encore dans l'écran */
+  padding-bottom: 0;
+  background-color: #000;
+}
+.slide-2, .slide-3, .slide-4 { background-size: cover; background-position: 50% 50%; }
+.slide-4 { background-position: 50% 40%; }
+.slider-3 .w-slide::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 45%; background-image: linear-gradient(to top, #0000008c, #0000); pointer-events: none; }
+.slider-3 .div-block-2 { z-index: 2; bottom: calc(84 * var(--u)); margin-bottom: 0; }
+.heading-5 { line-height: 1.2; }
+.heading-6 { margin-top: calc(6 * var(--u)); font-family: Proximanova, sans-serif; font-size: 18px; font-weight: 400; line-height: 1.35; } /* une seule police à toutes les tailles */
+.slider-3 .slide-nav { margin-bottom: calc(24 * var(--u)); }
+@media (min-width: 992px) {
+  .heading-5 { font-size: calc(40 * var(--u)); }
+  .heading-6 { font-size: calc(20 * var(--u)); }
+}
+
+/* Écran en hauteur (téléphone, tablette) : recadrages verticaux des trois mêmes photos. */
+@media (orientation: portrait) {
+  .slide-2 { background-image: url("/images/variantes/6727ad95475177577c9f89d0_archipel1-ada-architecture-portrait.jpg"); }
+  .slide-3 { background-image: url("/images/variantes/6727ad95e9453bd9afe4b3ac_archipel2-ada-architecture-portrait.jpg"); }
+  .slide-4 { background-image: url("/images/variantes/672889cbd9180342bbee3e02_archipel-3-portrait.jpg"); background-position: 50% 50%; }
+}
+@media (max-width: 479px) {
+  .heading-5 { font-size: 30px; }
+  .heading-6 { font-size: 16px; line-height: 22px; }
+  .slider-3 .div-block-2 { bottom: 72px; }
+}
+
+
+/* ---------- Barre du bas ----------
+   Sur Webflow, elle restait collée en bas de l'écran, semi-transparente, et recouvrait le formulaire
+   de contact ; son texte faisait 9 à 12 px. Elle prend place à la fin de la page, en noir comme le menu. */
+
+.footer-bottom-contact-static {
+  position: relative; top: auto; right: auto; bottom: auto; left: auto; z-index: auto;
+  flex-direction: row; justify-content: center; align-items: center;
+  height: auto; min-height: var(--pied-h); padding: calc(12 * var(--u)) var(--marge);
+  overflow: visible; border-top: 1px solid #ffffff14; background-color: #000;
+}
+/* Texte centré : seul dans la barre, il restait isolé dans le coin gauche sur les grands écrans. */
+.footer-copyright { font-family: Lato, sans-serif; font-size: calc(14 * var(--u)); line-height: calc(20 * var(--u)); letter-spacing: .03em; text-align: center; color: #b9bbc1; }
+@media (max-width: 767px) {
+  .footer-copyright { font-size: 13px; }
+}
+
+
+/* ---------- Pages projets ---------- */
+
+/* Diaporama : à l'ouverture, photo et vignettes tiennent dans l'écran ; cadre au format 3:2 sur tablette
+   et téléphone (sur Webflow : 600 px de haut dans un bloc de 40 % d'écran sur téléphone, d'où le
+   chevauchement avec les vignettes). */
+.section-custom-slider { height: auto; }
+.slider-wrap {
+  height: clamp(220px, min(calc(100vh - var(--menu-h) - 130px), 66.667vw), 1000px);
+  height: clamp(220px, min(calc(100svh - var(--menu-h) - 130px), 66.667vw), 1000px);
+}
+.slider-5 .w-slide::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 35%; background-image: linear-gradient(to top, #00000066, #0000); pointer-events: none; }
+.div-block-text-title { margin-bottom: 56px; padding-left: var(--marge); padding-right: var(--marge); }
+@media (max-width: 767px) {
+  .div-block-text-title { margin-bottom: 44px; }
+  .heading-9 { font-size: 24px; line-height: 30px; }
+  .heading-10 { font-size: 17px; line-height: 22px; }
+}
+@media (max-width: 479px) {
+  .div-block-text-title { margin-bottom: 36px; }
+  .heading-9 { margin: 0 0 2px; font-size: 20px; line-height: 26px; }
+  .heading-10 { margin: 0; font-size: 15px; line-height: 20px; }
+}
+
+/* Vignettes : sur Webflow, la bande centrée coupait la première et la dernière photo dès qu'elle
+   dépassait de l'écran, et les photos étaient déformées. Centrée quand elle tient, sinon elle défile. */
+.collection-list-wrapper-4 { justify-content: flex-start; padding: 10px 30px; scrollbar-width: thin; }
+.collection-list-2 { margin-left: auto; margin-right: auto; }
+.collection-list-2::before, .collection-list-2::after { content: none; } /* sans marge en trop au début et à la fin */
+.image-7 { display: block; object-fit: cover; }
+@media (max-width: 767px) {
+  .collection-list-wrapper-4 { padding: 8px 15px; }
+  .collection-list-2 { grid-column-gap: 0; column-gap: 0; }
+  .collection-item-3 { width: 106px; padding-left: 5px; padding-right: 5px; }
+  .image-7 { width: 96px; height: 64px; }
+}
+
+/* Fiche du projet : nom, lieu et catégorie à gauche du filet (la colonne était vide), informations
+   à droite, en Lato 16 px au lieu d'Arial 14 px. */
+.section-21 { margin-bottom: 0; padding: 56px var(--marge) 72px; }
+.columnproject { max-width: 1100px; margin-left: auto; margin-right: auto; }
+.colonneprojet { padding-left: 0; padding-right: 48px; border-right-width: 0; text-align: right; }
+._3colonneprojet { padding-left: 48px; padding-right: 0; }
+._3colonneprojet .w-richtext { font-family: Lato, sans-serif; font-size: 16px; line-height: 26px; color: #333; }
+._3colonneprojet .w-richtext p { margin-bottom: 12px; }
+._3colonneprojet .w-richtext strong { color: #111; }
+._3colonneprojet .w-richtext h3 { margin: 0 0 14px; font-size: 14px; line-height: 20px; letter-spacing: .12em; text-transform: uppercase; }
+/* Projet sans informations : la fiche (nom, lieu, catégorie) est centrée sous les photos. */
+.sans-informations .colonneprojet { float: none; width: 100%; padding: 0; text-align: center; }
+.sans-informations ._3colonneprojet { display: none; }
+.fiche-nom { margin: 0 0 6px; font-family: Lato, sans-serif; font-size: 28px; line-height: 36px; font-weight: 400; letter-spacing: .06em; text-transform: uppercase; color: #111; }
+.fiche-lieu { margin: 0 0 18px; font-family: Lato, sans-serif; font-size: 18px; line-height: 26px; font-weight: 300; color: #555; }
+.fiche-categorie { display: inline-block; padding: 6px 0; border-bottom: 1px solid #0000004d; font-family: Lato, sans-serif; font-size: 13px; line-height: 20px; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; color: #333; transition: color .2s, border-color .2s; }
+.fiche-categorie:hover { color: #000; border-bottom-color: #000; }
+@media (max-width: 991px) {
+  .colonneprojet { padding-right: 32px; }
+  ._3colonneprojet { padding-left: 32px; }
+  .fiche-nom { font-size: 24px; line-height: 32px; }
+}
+@media (max-width: 767px) {
+  .section-21 { padding: 32px var(--marge) 48px; }
+  .colonneprojet { padding: 0 0 20px; text-align: left; }
+  ._3colonneprojet { padding: 20px 0 0; border-left: 0; border-top: 1px solid #0000002b; }
+  .fiche-nom { font-size: 22px; line-height: 30px; }
+  .fiche-lieu { margin-bottom: 10px; font-size: 16px; line-height: 24px; }
+}
+
+
+/* ---------- Page Contact ----------
+   Photo d'en-tête moins haute (80 % de l'écran sur Webflow : le formulaire n'apparaissait qu'après
+   défilement), champs plus grands en 16 px (sans quoi l'iPhone zoome à la saisie), carte qui suit
+   la largeur de l'écran au lieu de 350 px fixes. */
+
+.section-18 { min-height: 0; height: clamp(200px, 42vh, 520px); }
+.contact-section { width: 100%; max-width: 1180px; margin: 56px auto 0; padding: 0 var(--marge); }
+.heading-14 { margin: 0; font-size: 30px; line-height: 38px; letter-spacing: .04em; }
+.contact-section .div-block-13 { margin: 20px 0 40px; }
+.contact-section .columns-2 { margin-left: 0; margin-right: 0; }
+.contact-section .colomn-cntact { padding-left: 0; padding-right: 56px; }
+.contact-section .column-3 { padding-left: 56px; padding-right: 0; }
+.contact-section .w-form { margin: 0; }
+.contact-section label { margin-bottom: 6px; font-size: 14px; line-height: 20px; color: #333; }
+.contact-section .w-input { height: 46px; margin-bottom: 18px; padding: 10px 14px; border: 1px solid #cfcfcf; border-radius: 0; font-family: Lato, sans-serif; font-size: 16px; line-height: 24px; -webkit-appearance: none; appearance: none; }
+.contact-section textarea.w-input { height: auto; min-height: 160px; resize: vertical; }
+.contact-section .w-input:focus { border-color: #555; }
+.submit-button-2 { min-height: 48px; margin-top: 6px; padding: 12px 40px; font-size: 14px; line-height: 24px; letter-spacing: .12em; transition: background-color .2s; }
+.submit-button-2:hover { background-color: #000; }
+.contact-section .heading-15 { margin: 0 0 8px; font-size: 18px; line-height: 24px; }
+.contact-section .paragraph-2 { margin-bottom: 28px; font-size: 16px; line-height: 26px; }
+/* Téléphone et e-mail cliquables ; zone de toucher agrandie sans changer l'interligne. */
+.contact-section .paragraph-2 a { display: inline-block; margin: -6px 0; padding: 6px 0; color: inherit; text-decoration: underline; text-decoration-color: #0000004d; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.contact-section .paragraph-2 a:hover { text-decoration-color: #333; }
+.code-embed { position: relative; width: 100%; max-width: 440px; height: auto; aspect-ratio: 1 / 1; }
+.code-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.w-form-done { padding: 24px; background-color: #f3f3f3; font-family: Lato, sans-serif; font-size: 16px; line-height: 24px; text-align: left; }
+.w-form-fail { padding: 14px 16px; background-color: #fbe9e9; font-family: Lato, sans-serif; font-size: 15px; line-height: 22px; }
+.div-margin { height: 80px; }
+@media (max-width: 991px) {
+  .section-18 { height: clamp(180px, 34vh, 380px); }
+  .contact-section .colomn-cntact { padding-right: 32px; }
+  .contact-section .column-3 { padding-left: 32px; }
+}
+@media (max-width: 767px) {
+  .section-18 { height: clamp(160px, 30vh, 280px); }
+  .contact-section { margin-top: 32px; }
+  .heading-14 { font-size: 24px; line-height: 32px; }
+  .contact-section .div-block-13 { margin: 16px 0 28px; }
+  .contact-section .colomn-cntact { padding-right: 0; }
+  .contact-section .column-3 { margin-top: 36px; padding: 32px 0 0; border-left: 0; border-top: 1px solid #0000002b; }
+  .submit-button-2 { width: 100%; }
+  .code-embed { max-width: none; aspect-ratio: 4 / 3; }
+  .div-margin { height: 56px; }
+}
+
+
+/* ---------- Page Nathalie Guerin ----------
+   Texte en 16 px (14 px sur Webflow), photo qui suit la largeur de sa colonne (elle débordait sur le
+   texte sur tablette), texte centré en hauteur à côté de la photo. */
+
+.main-section { padding-bottom: 72px; }
+.columns-3 { max-width: 1360px; margin-left: auto; margin-right: auto; padding: 20px var(--marge); }
+.div-block-18 { width: 100%; max-width: 400px; height: auto; aspect-ratio: 4 / 5; }
+.heading-24 { margin: 0 0 24px; font-size: 38px; line-height: 46px; }
+.rich-text-block-4 { margin-top: 0; font-size: 16px; line-height: 27px; -webkit-hyphens: auto; hyphens: auto; }
+.rich-text-block-4 p { margin-bottom: 14px; }
+@media (min-width: 768px) {
+  /* Photo et texte centrés en hauteur entre le menu et la barre du bas (ils restaient en haut de
+     l'écran, au-dessus d'un grand vide). */
+  .body-8 > .main-section { flex: 1 0 auto; display: flex; flex-direction: column; justify-content: center; }
+  .columns-3 { display: flex; align-items: center; width: 100%; }
+  .columns-3::before, .columns-3::after { content: none; }
+  .column-5 { display: block; padding: 0 0 0 56px; }
+}
+@media (min-width: 992px) {
+  /* Écran peu haut : la photo réduit pour que la page tienne sans défilement (192 px = marges autour). */
+  .div-block-18 { max-width: min(400px, max(300px, calc((100vh - var(--menu-h) - var(--pied-h) - 192px) * .8))); }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .column-6 { width: 42%; }
+  .column-5 { width: 58%; padding-left: 36px; }
+  .heading-24 { font-size: 32px; line-height: 40px; }
+}
+@media (max-width: 767px) {
+  .main-section { margin-top: 24px; padding-bottom: 48px; }
+  .section-marge { display: none; }
+  .columns-3 { padding: 0 var(--marge); }
+  .column-6, .column-5 { padding-left: 0; padding-right: 0; }
+  .div-block-18 { max-width: 360px; margin: 0 auto; }
+  .column-5 { padding-top: 32px; }
+  .heading-24 { margin-bottom: 18px; font-size: 28px; line-height: 36px; }
+  .rich-text-block-4 { text-align: left; -webkit-hyphens: manual; hyphens: manual; }
+}
+
+
+/* ---------- Pages catégories ---------- */
+
+/* Même écart qu'avant sous le titre (la page étant en colonne) ; titre aligné sur le logo. */
+.heading-7 { margin-bottom: 0; padding-left: var(--marge); }
+/* Deux colonnes : marge de 10 px des deux côtés (sur Webflow, 10 px à gauche et rien à droite). */
+@media (min-width: 768px) {
+  .collection-list { padding-right: 10px; }
+}
+/* Nom et lieu des projets sur les photos : un peu plus grands, à la mesure des vignettes sur ordinateur. */
+@media (min-width: 992px) {
+  .heading { font-size: 22px; }
+  .heading-2 { font-size: 15px; }
+}
+@media (max-width: 767px) {
+  .collection-item { padding-left: 0; padding-right: 0; }
+}
+@media (max-width: 479px) {
+  .heading, .heading-2 { font-family: Lato, sans-serif; } /* Webflow passait en Proxima Nova sur téléphone */
+  .heading { font-weight: 400; }
+}
+
+
+/* ---------- Page de recherche ----------
+   Sur Webflow, la page gardait le style par défaut (Arial, bouton bleu, aucune marge sur téléphone). */
+
+.page-recherche { width: 100%; max-width: 860px; padding: 48px var(--marge) 72px; font-family: Lato, sans-serif; color: #333; }
+.page-recherche h1 { margin: 0 0 24px; font-size: 30px; line-height: 38px; font-weight: 300; }
+.page-recherche form { display: flex; gap: 10px; margin: 0 0 32px; }
+.page-recherche label { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.page-recherche .w-input { flex: 1 1 auto; min-width: 0; height: 48px; margin: 0; padding: 10px 16px; border: 1px solid #cfcfcf; border-radius: 0; font-family: Lato, sans-serif; font-size: 16px; line-height: 24px; }
+.page-recherche .w-input:focus { border-color: #555; }
+.page-recherche .w-button { flex: none; height: 48px; padding: 0 28px; background-color: #252525; font-family: Lato, sans-serif; font-size: 14px; line-height: 48px; letter-spacing: .12em; text-transform: uppercase; transition: background-color .2s; }
+.page-recherche .w-button:hover { background-color: #000; }
+.page-recherche [data-resultats] > div > div { padding: 18px 0; border-bottom: 1px solid #0000001a; font-size: 15px; line-height: 24px; }
+.page-recherche [data-resultats] a { display: inline-block; padding: 4px 0; font-size: 19px; line-height: 26px; color: #111; text-decoration: none; }
+.page-recherche [data-resultats] a:hover { text-decoration: underline; }
+.page-recherche [data-resultats] a + div { margin-top: 2px; font-size: 13px; line-height: 20px; color: #888; overflow-wrap: anywhere; }
+.page-recherche [data-resultats] p { margin: 6px 0 0; color: #444; }
+@media (max-width: 479px) {
+  .page-recherche { padding-top: 32px; }
+  .page-recherche h1 { font-size: 24px; line-height: 32px; }
+  .page-recherche form { flex-direction: column; }
+  .page-recherche .w-button { width: 100%; }
+}
+
+
+/* ---------- Page introuvable (erreur 404) ---------- */
+
+.utility-page-wrap { flex: 1 0 auto; width: 100%; height: auto; max-height: none; padding: 80px var(--marge); }
+.utility-page-content { width: 100%; max-width: 440px; align-items: center; font-family: Lato, sans-serif; color: #333; }
+.utility-page-content img { width: 47px; margin-bottom: 24px; }
+.utility-page-content h2 { margin: 0 0 10px; font-size: 26px; line-height: 34px; font-weight: 300; }
+.texte-introuvable { font-size: 16px; line-height: 24px; }
+.lien-accueil { display: inline-block; margin-top: 28px; padding: 12px 28px; background-color: #252525; color: #fff; font-size: 14px; line-height: 24px; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; transition: background-color .2s; }
+.lien-accueil:hover { background-color: #000; }
+
+
+/* ---------- Grands écrans (à partir de 1 440 px de large) ----------
+   Les tailles des sections précédentes, multipliées par --u (voir « Repères communs ») : sur un écran
+   de 1 920 ou 2 560 px, ou avec un zoom réduit, la page grandit avec l'écran au lieu de garder des
+   tailles fixes en pixels, perdues au milieu de la page. Menu, barre du bas et accueil utilisent --u
+   directement dans leurs sections. */
+
+@media (min-width: 1440px) {
+  /* Diaporamas : flèches et points. */
+  .w-slider-arrow-left, .w-slider-arrow-right { width: calc(80 * var(--u)); font-size: calc(40 * var(--u)); }
+  .w-slider-nav { height: calc(40 * var(--u)); padding-top: calc(10 * var(--u)); font-size: calc(14 * var(--u)); }
+
+  /* Pages projets : diaporama, titre sur la photo, vignettes. */
+  .slider-wrap {
+    height: clamp(220px, min(calc(100vh - var(--menu-h) - 130 * var(--u)), 66.667vw), calc(1000 * var(--u)));
+    height: clamp(220px, min(calc(100svh - var(--menu-h) - 130 * var(--u)), 66.667vw), calc(1000 * var(--u)));
+  }
+  .div-block-text-title { margin-bottom: calc(56 * var(--u)); }
+  .heading-9 { margin: calc(20 * var(--u)) 0 calc(10 * var(--u)); font-size: calc(33 * var(--u)); line-height: calc(30 * var(--u)); }
+  .heading-10 { margin: calc(10 * var(--u)) 0; font-size: calc(22 * var(--u)); line-height: calc(20 * var(--u)); }
+  .collection-list-wrapper-4 { margin-bottom: calc(10 * var(--u)); padding: calc(10 * var(--u)) calc(30 * var(--u)); }
+  .collection-list-2 { grid-column-gap: calc(16 * var(--u)); column-gap: calc(16 * var(--u)); }
+  .collection-item-3 { width: calc(150 * var(--u)); padding-left: calc(10 * var(--u)); padding-right: calc(10 * var(--u)); }
+  .image-7 { height: calc(100 * var(--u)); }
+
+  /* Pages projets : fiche. */
+  .section-21 { padding: calc(72 * var(--u)) var(--marge) calc(96 * var(--u)); }
+  .columnproject { max-width: calc(1100 * var(--u)); }
+  .colonneprojet { padding-right: calc(48 * var(--u)); }
+  ._3colonneprojet { padding-left: calc(48 * var(--u)); }
+  ._3colonneprojet .w-richtext { font-size: calc(16 * var(--u)); line-height: calc(26 * var(--u)); }
+  ._3colonneprojet .w-richtext p { margin-bottom: calc(12 * var(--u)); }
+  ._3colonneprojet .w-richtext h3 { margin-bottom: calc(14 * var(--u)); font-size: calc(14 * var(--u)); line-height: calc(20 * var(--u)); }
+  .fiche-nom { margin-bottom: calc(6 * var(--u)); font-size: calc(28 * var(--u)); line-height: calc(36 * var(--u)); }
+  .fiche-lieu { margin-bottom: calc(18 * var(--u)); font-size: calc(18 * var(--u)); line-height: calc(26 * var(--u)); }
+  .fiche-categorie { padding: calc(6 * var(--u)) 0; font-size: calc(13 * var(--u)); line-height: calc(20 * var(--u)); }
+
+  /* Page Contact. */
+  .section-18 { height: clamp(200px, 42vh, calc(520 * var(--u))); }
+  .contact-section { max-width: calc(1180 * var(--u)); margin-top: calc(56 * var(--u)); }
+  .heading-14 { font-size: calc(30 * var(--u)); line-height: calc(38 * var(--u)); }
+  .contact-section .div-block-13 { margin: calc(20 * var(--u)) 0 calc(40 * var(--u)); }
+  .contact-section .colomn-cntact { padding-right: calc(56 * var(--u)); }
+  .contact-section .column-3 { padding-left: calc(56 * var(--u)); }
+  .contact-section label { margin-bottom: calc(6 * var(--u)); font-size: calc(14 * var(--u)); line-height: calc(20 * var(--u)); }
+  .contact-section .w-input { height: calc(46 * var(--u)); margin-bottom: calc(18 * var(--u)); padding: calc(10 * var(--u)) calc(14 * var(--u)); font-size: calc(16 * var(--u)); line-height: calc(24 * var(--u)); }
+  .contact-section textarea.w-input { height: auto; min-height: calc(160 * var(--u)); }
+  .submit-button-2 { min-height: calc(48 * var(--u)); margin-top: calc(6 * var(--u)); padding: calc(12 * var(--u)) calc(40 * var(--u)); font-size: calc(14 * var(--u)); line-height: calc(24 * var(--u)); }
+  .contact-section .heading-15 { margin-bottom: calc(8 * var(--u)); font-size: calc(18 * var(--u)); line-height: calc(24 * var(--u)); }
+  .contact-section .paragraph-2 { margin-bottom: calc(28 * var(--u)); font-size: calc(16 * var(--u)); line-height: calc(26 * var(--u)); }
+  .code-embed { max-width: calc(440 * var(--u)); }
+  .w-form-done { padding: calc(24 * var(--u)); font-size: calc(16 * var(--u)); line-height: calc(24 * var(--u)); }
+  .w-form-fail { padding: calc(14 * var(--u)) calc(16 * var(--u)); font-size: calc(15 * var(--u)); line-height: calc(22 * var(--u)); }
+  .div-margin { height: calc(80 * var(--u)); }
+
+  /* Page Nathalie Guerin (192 = marges au-dessus et au-dessous de la photo). */
+  .main-section { margin-top: calc(40 * var(--u)); padding-bottom: calc(72 * var(--u)); }
+  .section-marge { padding-bottom: calc(40 * var(--u)); }
+  .columns-3 { max-width: calc(1360 * var(--u)); padding: calc(20 * var(--u)) var(--marge); }
+  .div-block-18 { max-width: min(calc(440 * var(--u)), max(320px, calc((100vh - var(--menu-h) - var(--pied-h) - 192 * var(--u)) * .8))); }
+  .column-5 { padding: 0 calc(60 * var(--u)) 0 calc(56 * var(--u)); }
+  .heading-24 { margin-bottom: calc(24 * var(--u)); font-size: calc(38 * var(--u)); line-height: calc(46 * var(--u)); }
+  .rich-text-block-4 { font-size: calc(16 * var(--u)); line-height: calc(27 * var(--u)); }
+  .rich-text-block-4 p { margin-bottom: calc(14 * var(--u)); }
+
+  /* Pages catégories. */
+  .heading-7 { margin-top: calc(20 * var(--u)); font-size: calc(24 * var(--u)); line-height: calc(30 * var(--u)); }
+  .collection-list-wrapper { margin-top: calc(20 * var(--u)); }
+  .div-block.project-container { height: calc(550 * var(--u)); }
+  .div-block-texts { padding: 0 calc(10 * var(--u)) calc(10 * var(--u)) calc(20 * var(--u)); }
+  .heading { margin: calc(20 * var(--u)) 0 calc(10 * var(--u)); font-size: calc(22 * var(--u)); line-height: calc(30 * var(--u)); }
+  .heading-2 { margin: calc(10 * var(--u)) 0; font-size: calc(15 * var(--u)); line-height: calc(20 * var(--u)); }
+
+  /* Page de recherche. */
+  .page-recherche { max-width: calc(860 * var(--u)); padding: calc(48 * var(--u)) var(--marge) calc(72 * var(--u)); }
+  .page-recherche h1 { margin-bottom: calc(24 * var(--u)); font-size: calc(30 * var(--u)); line-height: calc(38 * var(--u)); }
+  .page-recherche form { gap: calc(10 * var(--u)); margin-bottom: calc(32 * var(--u)); }
+  .page-recherche .w-input { height: calc(48 * var(--u)); padding: calc(10 * var(--u)) calc(16 * var(--u)); font-size: calc(16 * var(--u)); line-height: calc(24 * var(--u)); }
+  .page-recherche .w-button { height: calc(48 * var(--u)); padding: 0 calc(28 * var(--u)); font-size: calc(14 * var(--u)); line-height: calc(48 * var(--u)); }
+  .page-recherche [data-resultats] > div > div { padding: calc(18 * var(--u)) 0; font-size: calc(15 * var(--u)); line-height: calc(24 * var(--u)); }
+  .page-recherche [data-resultats] a { padding: calc(4 * var(--u)) 0; font-size: calc(19 * var(--u)); line-height: calc(26 * var(--u)); }
+  .page-recherche [data-resultats] a + div { font-size: calc(13 * var(--u)); line-height: calc(20 * var(--u)); }
+
+  /* Page introuvable. */
+  .utility-page-wrap { padding: calc(80 * var(--u)) var(--marge); }
+  .utility-page-content { max-width: calc(440 * var(--u)); }
+  .utility-page-content img { width: calc(47 * var(--u)); margin-bottom: calc(24 * var(--u)); }
+  .utility-page-content h2 { font-size: calc(26 * var(--u)); line-height: calc(34 * var(--u)); }
+  .texte-introuvable { font-size: calc(16 * var(--u)); line-height: calc(24 * var(--u)); }
+  .lien-accueil { margin-top: calc(28 * var(--u)); padding: calc(12 * var(--u)) calc(28 * var(--u)); font-size: calc(14 * var(--u)); line-height: calc(24 * var(--u)); }
+}

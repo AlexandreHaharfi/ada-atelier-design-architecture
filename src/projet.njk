@@ -1,0 +1,132 @@
+---js
+{
+  pagination: { data: "projets", size: 1, alias: "projet" },
+  permalink: (data) => `projets/${data.projet.slug}.html`,
+  layout: "base.njk",
+  classeBody: "body-2",
+  wfPage: "670680d7440d64ed3d336e59",
+  wfCollection: "670680d6440d64ed3d336cce",
+  eleventyComputed: {
+    wfItemSlug: (data) => data.projet.slug,
+    titre: (data) => `${data.projet.nom} | Nathalie Guerin`,
+    description: (data) => `Découvrez le projet ${data.projet.nom} à ${data.projet.localisation || ""}, par Nathalie Guerin.`,
+  },
+  scriptsFin: ["<script src=\"/js/diaporama-projet.js\" type=\"text/javascript\"></script>"],
+}
+---
+{#- Page d'un projet (gabarit « Projets Template » de Webflow).
+    Le diaporama compte 25 diapositives vides : diaporama-projet.js (script d'origine de la page)
+    y place les photos du projet puis retire les diapositives en trop. -#}
+{% include "composants/menu-principal.njk" %}
+<div class="section-custom-slider">
+  <div class="slider-wrap">
+    <div data-delay="4000" data-animation="slide" class="slider-5 w-slider" data-autoplay="true" data-easing="ease" data-hide-arrows="false" data-disable-swipe="false" data-autoplay-limit="0" data-nav-spacing="3" data-duration="500" data-infinite="true" id="MultiImageSlider">
+      <div class="div-block-text-title">
+        <h3 class="heading-9{% if not projet.nom %} w-dyn-bind-empty{% endif %}">{{ projet.nom }}</h3>
+        <h5 class="heading-10{% if not projet.localisation %} w-dyn-bind-empty{% endif %}">{{ projet.localisation }}</h5>
+      </div>
+      <div class="w-slider-mask">
+        <div class="slide w-slide"></div>
+        <div class="slide w-slide"></div>
+        <div class="slide w-slide"></div>
+        <div class="slide w-slide"></div>
+        <div class="slide w-slide"></div>
+        <div class="slide w-slide"></div>
+        <div class="slide w-slide"></div>
+        <div class="slide w-slide"></div>
+        <div class="slide w-slide"></div>
+        <div class="slide w-slide"></div>
+        <div class="slide w-slide"></div>
+        <div class="slide w-slide"></div>
+        <div class="slide w-slide"></div>
+        <div class="slide w-slide"></div>
+        <div class="slide w-slide"></div>
+        <div class="slide w-slide"></div>
+        <div class="slide w-slide"></div>
+        <div class="slide w-slide"></div>
+        <div class="slide w-slide"></div>
+        <div class="slide w-slide"></div>
+        <div class="slide w-slide"></div>
+        <div class="slide w-slide"></div>
+        <div class="slide w-slide"></div>
+        <div class="slide w-slide"></div>
+        <div class="slide w-slide"></div>
+      </div>
+      <div class="w-slider-arrow-left">
+        <div class="w-icon-slider-left"></div>
+      </div>
+      <div class="w-slider-arrow-right">
+        <div class="w-icon-slider-right"></div>
+      </div>
+      <div class="w-slider-nav w-round"></div>
+    </div>
+  </div>
+  <div id="MultiImageCollectionWrapper" class="collection-list-wrapper-3 w-dyn-list">
+    {% if projet.photos.length %}
+    <div role="list" class="w-dyn-items">
+      {% for photo in projet.photos %}
+      <div style="background-image:url(&quot;{{ photo | fond(2600) }}&quot;)" role="listitem" class="w-dyn-item w-dyn-repeater-item"></div>
+      {% endfor %}
+    </div>
+    <div class="w-dyn-hide w-dyn-empty" data-pagefind-ignore>
+      <div>No items found.</div>
+    </div>
+    {% else %}
+    <div class="w-dyn-empty" data-pagefind-ignore>
+      <div>No items found.</div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+<div class="collection-list-wrapper-4 w-dyn-list">
+  {% if projet.photos.length %}
+  <div role="list" class="collection-list-2 w-dyn-items w-row">
+    {% for photo in projet.photos %}
+    {% set variantes = photo | srcset %}
+    <div role="listitem" class="collection-item-3 w-dyn-item w-dyn-repeater-item w-col w-col-2">
+      <a href="#" class="lightbox-link w-inline-block w-lightbox">
+        {% if variantes %}
+        <img src="{{ photo }}" loading="lazy" alt="" sizes="130px" srcset="{{ variantes }}" class="image-7">
+        {% else %}
+        <img src="{{ photo }}" loading="lazy" alt="" class="image-7">
+        {% endif %}
+        <script type="application/json" class="w-json">{{ photo | lightbox("Projets") | safe }}</script>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="w-dyn-hide w-dyn-empty" data-pagefind-ignore>
+    <div>No items found.</div>
+  </div>
+  {% else %}
+  <div class="w-dyn-empty" data-pagefind-ignore>
+    <div>No items found.</div>
+  </div>
+  {% endif %}
+</div>
+<section class="section-21{% if not projet.informations %} sans-informations{% endif %}">
+  <div class="columns-2 columnproject w-row">
+    {#- Colonne de gauche (vide sur Webflow) : nom, lieu et catégorie du projet, avec un lien vers la catégorie. -#}
+    <div class="column-2 colonneprojet w-col w-col-6">
+      <h2 class="fiche-nom">{{ projet.nom }}</h2>
+      {% if projet.localisation %}
+      <p class="fiche-lieu">{{ projet.localisation }}</p>
+      {% endif %}
+      {% for c in categories %}
+      {% if c.type == projet.type %}
+      <a href="/{{ c.slug }}" class="fiche-categorie">{{ c.type }}</a>
+      {% endif %}
+      {% endfor %}
+    </div>
+    <div class="column-3 _3colonneprojet w-col w-col-6">
+      {% if projet.informations %}
+      <div class="w-richtext">{{ projet.informations | texteRiche | safe }}</div>
+      {% else %}
+      <div class="w-dyn-bind-empty w-richtext"></div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+<section class="section-footer">
+  {% include "composants/pied-de-page.njk" %}
+</section>

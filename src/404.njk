@@ -1,0 +1,22 @@
+---
+permalink: 404.html
+layout: base.njk
+wfPage: 673c18487bc5618d153c6e66
+titre: Page introuvable | Nathalie Guerin
+meta:
+  - <meta content="Page introuvable" property="og:title">
+  - <meta content="Page introuvable" name="twitter:title">
+horsRecherche: true
+---
+{#- Page « introuvable » (page utilitaire 404 de Webflow), traduite en français,
+    avec le menu, la barre du bas et un lien vers l'accueil. -#}
+{% include "composants/menu-principal.njk" %}
+<div class="utility-page-wrap">
+  <div class="utility-page-content">
+    <img src="/images/site/page-not-found.svg" alt="">
+    <h2>Page introuvable</h2>
+    <p class="texte-introuvable">La page que vous cherchez n&#x27;existe pas ou a été déplacée.</p>
+    <a href="/" class="lien-accueil">Retour à l&#x27;accueil</a>
+  </div>
+</div>
+{% include "composants/pied-de-page.njk" %}

@@ -1,0 +1,6 @@
+/* Diaporama de l'accueil : Webflow servait les photographies originales (plus de 7 000 px, 2 à 3 Mo
+   chacune). On sert une version de 3 200 px, la plus grande taille que Webflow produit lui-même :
+   identique à l'écran (mesuré sur écran Retina), quatre fois plus légère. Mêmes images, mêmes cadrages. */
+.slide-2 { background-image: url("/images/variantes/6727ad95475177577c9f89d0_archipel1-ada-architecture-p-3200.jpg"); }
+.slide-3 { background-image: url("/images/variantes/6727ad95e9453bd9afe4b3ac_archipel2-ada-architecture-p-3200.jpg"); }
+.slide-4 { background-image: url("/images/variantes/672889cbd9180342bbee3e02_archipel-3-p-3200.jpg"); }

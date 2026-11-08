@@ -1,0 +1,8 @@
+# Construction du site sur Netlify : Eleventy produit les pages dans _site, puis Pagefind
+# y ajoute l'index du moteur de recherche.
+[build]
+  command = "npm run build"
+  publish = "_site"
+
+[build.environment]
+  NODE_VERSION = "22"
