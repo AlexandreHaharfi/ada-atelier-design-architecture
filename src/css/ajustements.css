@@ -467,3 +467,22 @@ body > .footer-bottom-contact-static, body > .section-footer { margin-top: auto;
   .texte-introuvable { font-size: calc(16 * var(--u)); line-height: calc(24 * var(--u)); }
   .lien-accueil { margin-top: calc(28 * var(--u)); padding: calc(12 * var(--u)) calc(28 * var(--u)); font-size: calc(14 * var(--u)); line-height: calc(24 * var(--u)); }
 }
+
+
+/* ---------- Mentions légales (9 novembre 2026) ----------
+   Même présentation que la page Contact : titre, filet, texte en Lato sur fond blanc. */
+.page-mentions { display: flex; flex-direction: column; min-height: 100vh; background-color: #fff; }
+.mentions-legales { max-width: 860px; margin-top: calc(var(--menu-h) + 56px); font-family: Lato, sans-serif; color: #333; }
+.mentions-legales h2 { margin: 32px 0 10px; font-family: Lato, sans-serif; font-size: 18px; line-height: 26px; font-weight: 700; color: #000; }
+.mentions-legales p { margin: 0 0 12px; font-size: 16px; line-height: 26px; }
+.mentions-legales a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+@media (min-width: 1440px) {
+  .mentions-legales { max-width: calc(860 * var(--u)); margin-top: calc(var(--menu-h) + 56 * var(--u)); }
+  .mentions-legales h2 { margin: calc(32 * var(--u)) 0 calc(10 * var(--u)); font-size: calc(18 * var(--u)); line-height: calc(26 * var(--u)); }
+  .mentions-legales p { margin-bottom: calc(12 * var(--u)); font-size: calc(16 * var(--u)); line-height: calc(26 * var(--u)); }
+}
+
+/* Lien « Mentions légales » de la barre du bas, dans le prolongement du copyright. */
+.pied-separateur { margin: 0 .7em; opacity: .5; }
+.pied-lien { color: inherit; text-decoration: none; }
+.pied-lien:hover { color: #fff; text-decoration: underline; text-underline-offset: 2px; }

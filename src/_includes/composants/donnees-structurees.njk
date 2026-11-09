@@ -1,0 +1,33 @@
+{#- Données structurées (schema.org) de l'agence, lues par les moteurs de recherche et les assistants IA.
+    Uniquement des informations publiques et vérifiées : site, registre des entreprises, Tableau de l'Ordre. -#}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": "{{ site.domaine }}/#agence",
+  "name": "{{ site.nom | safe }}",
+  "alternateName": "ADA",
+  "description": "Agence d'architecture de Nathalie Guérin, architecte DPLG, à Lattes (Hérault) : {% for c in categories %}{{ c.type | lower | safe }}{% if not loop.last %}, {% endif %}{% endfor %}.",
+  "url": "{{ site.domaine }}/",
+  "logo": "{{ site.domaine }}/images/site/6727cf5bdd9b588ebe6b0f92_ada-favicon-256x256.png",
+  "image": "{{ site.domaine }}{{ site.imagePartage }}",
+  "telephone": "+33 6 22 81 20 08",
+  "email": "guerinnat@wanadoo.fr",
+  "vatID": "FR08752336784",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Centre d'affaires Audace, 1366 avenue des Platanes",
+    "postalCode": "34970",
+    "addressLocality": "Lattes",
+    "addressRegion": "Occitanie",
+    "addressCountry": "FR"
+  },
+  "founder": {
+    "@type": "Person",
+    "@id": "{{ site.domaine }}/nathalie-guerin#nathalie-guerin",
+    "name": "Nathalie Guérin",
+    "jobTitle": "Architecte DPLG",
+    "url": "{{ site.domaine }}/nathalie-guerin"
+  }
+}
+</script>

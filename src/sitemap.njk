@@ -6,7 +6,7 @@ eleventyExcludeFromCollections: true
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 {#- Pages utiles seulement : les pages de travail (brouillon, bouillon-menu, article vide)
     et la page vide des collaborateurs restent en ligne mais ne sont pas proposées aux moteurs. -#}
-{% for chemin in ["/", "/nathalie-guerin", "/contact"] %}
+{% for chemin in ["/", "/nathalie-guerin", "/contact", "/mentions-legales"] %}
   <url><loc>{{ site.domaine }}{{ chemin }}</loc></url>
 {% endfor %}
 {% for c in categories %}

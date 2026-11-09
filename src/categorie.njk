@@ -27,9 +27,9 @@
         {% if categorie.image %}
         {% set variantes = projet.couverture | srcset %}
         {% if variantes %}
-        <img src="{{ projet.couverture }}" loading="lazy" alt="" sizes="(max-width: 479px) 100vw, (max-width: 767px) 99vw, (max-width: 1439px) 49vw, 50vw" srcset="{{ variantes }}" class="image-cover">
+        <img src="{{ projet.couverture }}" loading="lazy" alt="{{ projet.nom }}{% if projet.localisation %}, {{ projet.localisation }}{% endif %}" sizes="(max-width: 479px) 100vw, (max-width: 767px) 99vw, (max-width: 1439px) 49vw, 50vw" srcset="{{ variantes }}" class="image-cover">
         {% else %}
-        <img src="{{ projet.couverture }}" loading="lazy" alt="" class="image-cover">
+        <img src="{{ projet.couverture }}" loading="lazy" alt="{{ projet.nom }}{% if projet.localisation %}, {{ projet.localisation }}{% endif %}" class="image-cover">
         {% endif %}
         {% endif %}
         <div class="div-block-texts flip-text">

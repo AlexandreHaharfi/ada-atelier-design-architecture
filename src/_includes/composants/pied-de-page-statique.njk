@@ -1,9 +1,7 @@
 {# Pied de page de la page Contact (composant Webflow « Footer Static »).
-   L'année suit celle de la construction du site ; « résevés » corrigé. #}
+   L'année suit celle de la construction du site ; « résevés » corrigé.
+   Les liens « Terms Of Use » et « Privacy Policy » de Webflow, masqués et vides, sont remplacés
+   par le lien vers les mentions légales. #}
 <div class="footer-bottom-contact-static">
-  <div class="footer-copyright">© {{ annee }} ADA. Tous droits réservés</div>
-  <div class="footer-legal-block">
-    <a href="#" class="footer-legal-link">Terms Of Use</a>
-    <a href="#" class="footer-legal-link">Privacy Policy</a>
-  </div>
+  <div class="footer-copyright">© {{ annee }} ADA. Tous droits réservés<span class="pied-separateur" aria-hidden="true">|</span><a href="/mentions-legales" class="pied-lien">Mentions légales</a></div>
 </div>

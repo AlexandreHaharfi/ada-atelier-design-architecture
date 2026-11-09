@@ -4,7 +4,9 @@
 (function () {
   document.addEventListener('submit', function (evt) {
     var form = evt.target;
-    if (!form.matches || !form.matches('form[data-netlify]')) return;
+    // Netlify retire l'attribut data-netlify du HTML publié : on reconnaît le formulaire
+    // à son champ caché « form-name », qu'il conserve.
+    if (!form.querySelector || !form.querySelector('input[name="form-name"]')) return;
     evt.preventDefault();
     var wrap = form.closest('div.w-form');
     var done = wrap ? wrap.querySelector(':scope > .w-form-done') : null;

@@ -11,6 +11,31 @@
     {% for ligne in meta %}
     {{ ligne | metaRecherche | safe }}
     {% endfor %}
+    {#- Référencement : adresse canonique (celle du plan du site), pages de travail exclues des moteurs,
+        aperçu des liens partagés (Open Graph) et données structurées de l'agence. -#}
+    {% set cheminPage = page.url | cheminWebflow %}
+    {% set metaTexte = (meta or []) | join(" ") %}
+    {% if noindex %}
+    <meta name="robots" content="noindex">
+    {% else %}
+    <link rel="canonical" href="{{ site.domaine }}{{ cheminPage }}">
+    {% endif %}
+    {% if "og:title" not in metaTexte %}
+    <meta content="{{ titre }}" property="og:title">
+    {% endif %}
+    {% if description and "og:description" not in metaTexte %}
+    <meta content="{{ description }}" property="og:description">
+    {% endif %}
+    {% if "og:type" not in metaTexte %}
+    <meta content="website" property="og:type">
+    {% endif %}
+    <meta content="{{ site.domaine }}{{ cheminPage }}" property="og:url">
+    <meta content="{{ site.nom }}" property="og:site_name">
+    <meta content="fr_FR" property="og:locale">
+    <meta content="{{ site.domaine }}{{ (imagePartage | fond(1600)) if imagePartage else site.imagePartage }}" property="og:image">
+    {% if donneesStructurees %}
+    {% include "composants/donnees-structurees.njk" %}
+    {% endif %}
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <meta content="{{ site.googleVerification }}" name="google-site-verification">
     <link href="/css/polices.css" rel="stylesheet" type="text/css">
