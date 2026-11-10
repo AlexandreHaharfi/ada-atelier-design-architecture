@@ -1,4 +1,4 @@
-// Serveur local pour regarder le site construit (dossier _site) comme il sera servi par Netlify :
+// Serveur local pour regarder le site construit (dossier _site) comme il est servi par GitHub Pages :
 // « /contact » sert contact.html, « /projets/archipel » sert projets/archipel.html,
 // une adresse inconnue renvoie 404.html, et l'envoi du formulaire de contact (POST) est accepté
 // et affiché dans le terminal au lieu d'être transmis par courriel.
@@ -22,7 +22,7 @@ function fichier(p) {
   try { return fs.statSync(p).isFile() ? p : null; } catch { return null; }
 }
 
-// Même ordre de recherche que Netlify : fichier exact, puis « .html », puis « index.html » du dossier.
+// Même ordre de recherche que GitHub Pages : fichier exact, puis « .html », puis « index.html » du dossier.
 function trouver(chemin) {
   const base = path.join(RACINE, chemin);
   if (!base.startsWith(RACINE)) return null;
