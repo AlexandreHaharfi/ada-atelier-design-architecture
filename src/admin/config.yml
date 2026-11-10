@@ -1,9 +1,9 @@
 # Interface d'administration du site (adresse : /admin).
-# Chaque enregistrement crée un commit dans le dépôt GitHub du site ; Netlify reconstruit
+# Chaque enregistrement crée un commit dans le dépôt GitHub du site ; GitHub Pages reconstruit
 # alors le site et le met en ligne en une à deux minutes.
 # L'interface s'affiche dans la langue du navigateur.
 # Connexion : bouton « Se connecter avec un jeton d'accès » (jeton GitHub avec le droit « Contents : lecture et écriture »
-# sur ce seul dépôt), ou compte GitHub si l'application OAuth est déclarée dans Netlify.
+# sur ce seul dépôt).
 # En local (npm run serve puis http://localhost:8080/admin), « Travailler avec un dépôt local »
 # modifie directement les fichiers du dossier site.
 backend:
