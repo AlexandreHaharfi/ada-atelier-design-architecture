@@ -4,6 +4,10 @@
 <html data-wf-domain="{{ site.domaineWebflow }}" data-wf-page="{{ wfPage }}" data-wf-site="{{ site.wfSite }}" lang="fr"{% if wfCollection %} data-wf-collection="{{ wfCollection }}" data-wf-item-slug="{{ wfItemSlug }}"{% endif %}>
   <head>
     <meta charset="utf-8">
+    {#- Bascule vers https qui s'active d'elle-même : sur l'adresse http du domaine, on charge l'icône du site
+        en https ; si le certificat est valide elle se charge et la page est rechargée en https, sinon on reste
+        en http sans rien afficher. Sert tant que « Enforce HTTPS » n'est pas coché dans GitHub Pages. -#}
+    <script>(function(l){if(l.protocol==='http:'&&/(^|\.)ada-atelier-design-architecture\.fr$/.test(l.hostname)){var i=new Image();i.onload=function(){l.replace('https://'+l.host+l.pathname+l.search+l.hash)};i.src='https://'+l.host+'/images/site/6727cf5bdd9b588ebe6b0f92_ada-favicon-256x256.png?v='+Date.now()}})(location);</script>
     <title data-pagefind-meta="title">{{ titre }}</title>
     {% if description %}
     <meta content="{{ description }}" name="description" data-pagefind-meta="description[content]">
