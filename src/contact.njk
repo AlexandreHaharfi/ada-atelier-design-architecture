@@ -15,7 +15,8 @@ scriptsFin:
   - <script src="/js/formulaire.js" type="text/javascript"></script>
 donneesStructurees: true
 ---
-{#- Le formulaire est envoyé à Netlify Forms (qui transmet chaque message par e-mail) au lieu de Webflow.
+{#- Le formulaire est envoyé à FormSubmit (formsubmit.co, gratuit et sans compte), qui transmet chaque message
+    par e-mail à l'adresse de l'action, avec copie (_cc) à Nathalie. Le champ « email » sert d'adresse de réponse.
     formulaire.js garde le comportement de Webflow : message « Merci ! » sans changer de page. -#}
 {% include "composants/menu-principal.njk" %}
 <section class="section-18"></section>
@@ -25,9 +26,12 @@ donneesStructurees: true
   <div class="columns-2 w-row">
     <div class="column-2 colomn-cntact w-col w-col-6">
       <div class="w-form">
-        <form id="email-form" name="email-form" data-name="Email Form" method="post" action="/contact" data-netlify="true" netlify-honeypot="bot-field" data-wf-page-id="670a79081f26174c9f344a6f" data-wf-element-id="4c86a3d2-c901-d7e7-566f-ad012d1f875f">
-          <input type="hidden" name="form-name" value="email-form">
-          <div style="display:none"><label>Ne pas remplir : <input name="bot-field" tabindex="-1" autocomplete="off"></label></div>
+        <form id="email-form" name="email-form" data-name="Email Form" method="post" action="https://formsubmit.co/alexandrehaharfi@gmail.com" data-envoi="formsubmit" data-wf-page-id="670a79081f26174c9f344a6f" data-wf-element-id="4c86a3d2-c901-d7e7-566f-ad012d1f875f">
+          <input type="hidden" name="_subject" value="Nouveau message depuis le site ADA">
+          <input type="hidden" name="_cc" value="guerinnat@wanadoo.fr">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <div style="display:none"><label>Ne pas remplir : <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></div>
           <label for="Nom" class="field-label">Nom: *</label>
           <input class="w-input" maxlength="256" name="Nom" data-name="Nom" placeholder="" type="text" id="Nom">
           <label for="email" class="field-label-2">Email: *</label>

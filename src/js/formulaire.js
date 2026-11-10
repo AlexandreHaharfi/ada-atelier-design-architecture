@@ -1,12 +1,10 @@
-/* Envoi du formulaire de contact à Netlify Forms, sans quitter la page.
+/* Envoi du formulaire de contact à FormSubmit (formsubmit.co), sans quitter la page.
    Reprend le comportement du module « forms » de webflow.js : texte « Patientez... » sur le bouton
    pendant l'envoi, puis formulaire masqué et message de succès affiché (ou message d'erreur). */
 (function () {
   document.addEventListener('submit', function (evt) {
     var form = evt.target;
-    // Netlify retire l'attribut data-netlify du HTML publié : on reconnaît le formulaire
-    // à son champ caché « form-name », qu'il conserve.
-    if (!form.querySelector || !form.querySelector('input[name="form-name"]')) return;
+    if (!form.getAttribute || form.getAttribute('data-envoi') !== 'formsubmit') return;
     evt.preventDefault();
     var wrap = form.closest('div.w-form');
     var done = wrap ? wrap.querySelector(':scope > .w-form-done') : null;
@@ -18,9 +16,17 @@
       if (btn.getAttribute('data-wait')) btn.value = btn.getAttribute('data-wait');
     }
     if (fail) fail.style.display = 'none';
-    var corps = new URLSearchParams(new FormData(form)).toString();
-    fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: corps })
-      .then(function (rep) { return rep.ok; }, function () { return false; })
+    var donnees = {};
+    new FormData(form).forEach(function (valeur, cle) { donnees[cle] = valeur; });
+    // Point d'envoi « ajax » de FormSubmit : réponse en JSON au lieu d'une page de remerciement.
+    var adresse = form.action.replace('://formsubmit.co/', '://formsubmit.co/ajax/');
+    fetch(adresse, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(donnees)
+    })
+      .then(function (rep) { return rep.ok ? rep.json() : null; })
+      .then(function (json) { return !!json && String(json.success) === 'true'; }, function () { return false; })
       .then(function (ok) {
         if (btn) { btn.disabled = false; btn.value = label; }
         if (ok) {
