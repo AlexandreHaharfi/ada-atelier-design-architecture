@@ -33,7 +33,7 @@ export default function (eleventyConfig) {
   for (const dossier of ['css', 'js', 'fonts', 'images', 'admin']) {
     eleventyConfig.addPassthroughCopy({ [`src/${dossier}`]: dossier });
   }
-  eleventyConfig.addPassthroughCopy({ 'src/robots.txt': 'robots.txt' });
+  eleventyConfig.addPassthroughCopy({ 'src/_redirects': '_redirects', 'src/robots.txt': 'robots.txt' });
 
   eleventyConfig.setNunjucksEnvironmentOptions({ autoescape: true, trimBlocks: true, lstripBlocks: true });
 
