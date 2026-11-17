@@ -128,6 +128,30 @@
     </div>
   </div>
 </section>
+{#- Autres projets : trois projets de la même catégorie, à la suite du projet courant dans l'ordre de la page
+    catégorie, complétés si besoin par les projets les plus récents. Relie les pages projets entre elles. -#}
+{% set categorieProjet = (categories | selectattr("type", "equalto", projet.type) | first) %}
+{% set voisins = projets | autresProjets(projet, categorieProjet.tri if categorieProjet else "", 3) %}
+{% if voisins.length %}
+<section class="autres-projets" data-pagefind-ignore="all">
+  <div class="autres-projets-cadre">
+    <h2>Autres projets</h2>
+    <ul class="autres-projets-liste">
+      {% for p in voisins %}
+      {% set image = p.couverture or p.photos[0] %}
+      {% set variantes = image | srcset %}
+      <li>
+        <a href="/projets/{{ p.slug }}" class="autre-projet">
+          <span class="autre-projet-image"><img src="{{ image | fond(800) }}" loading="lazy" alt="{{ p.nom | trim }}{% if p.localisation %}, {{ p.localisation }}{% endif %}"{% if variantes %} srcset="{{ variantes }}" sizes="(max-width: 767px) 33vw, 360px"{% endif %}></span>
+          <span class="autre-projet-nom">{{ p.nom | trim }}</span>
+          {% if p.localisation %}<span class="autre-projet-lieu">{{ p.localisation }}</span>{% endif %}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
 <section class="section-footer">
   {% include "composants/pied-de-page.njk" %}
 </section>

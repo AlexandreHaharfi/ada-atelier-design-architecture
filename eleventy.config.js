@@ -77,6 +77,23 @@ export default function (eleventyConfig) {
     return liste.sort((a, b) => b.cree_le.localeCompare(a.cree_le));
   });
 
+  // Autres projets d'une page projet : les suivants de la même catégorie (en boucle, dans l'ordre de la page
+  // catégorie), complétés par les plus récents des autres catégories. Seulement des projets avec une image.
+  eleventyConfig.addFilter('autresProjets', function (projets, projet, tri, nombre = 3) {
+    const avecImage = (p) => p.slug !== projet.slug && (p.couverture || p.photos?.length);
+    const filtre = eleventyConfig.getFilter('projetsDe');
+    const memes = filtre([...projets], projet.type, tri);
+    const i = memes.findIndex((p) => p.slug === projet.slug);
+    const suite = [...memes.slice(i + 1), ...memes.slice(0, Math.max(i, 0))].filter(avecImage);
+    const choisis = suite.slice(0, nombre);
+    const recents = [...projets].sort((a, b) => b.cree_le.localeCompare(a.cree_le));
+    for (const p of recents) {
+      if (choisis.length >= nombre) break;
+      if (avecImage(p) && !choisis.includes(p)) choisis.push(p);
+    }
+    return choisis;
+  });
+
   // Lien vers la page courante : Webflow ajoute aria-current="page" et la classe w--current.
   eleventyConfig.addShortcode('actif', function (href) {
     return cheminWebflow(this.page?.url) === href ? ' aria-current="page"' : '';

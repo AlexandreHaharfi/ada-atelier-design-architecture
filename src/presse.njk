@@ -1,0 +1,49 @@
+---js
+{
+  permalink: "presse.html",
+  layout: "base.njk",
+  wfPage: "670a79081f26174c9f344a6f",
+  titre: "Presse | Nathalie Guerin Architecte, ADA Architecture",
+  description: "Articles de presse et publications sur les projets de Nathalie Guerin, architecte à Montpellier, et de l'agence ADA - Atelier de Design et d'Architecture.",
+  classeBody: "page-presse",
+  horsRecherche: true,
+  donneesStructurees: true,
+  articles: [
+    { date: "2026-11-11", dateTexte: "11 novembre 2026", source: "Midi Libre", titre: "La résidence Sérénity, pour un renouveau urbain nécessaire", url: "https://www.midilibre.fr/2026/11/11/la-residence-serenity-pour-un-renouveau-urbain-necessaire-13646716.php", resume: "Au Cap d'Agde, 95 appartements conçus par Nathalie Guerin à la place d'un chantier abandonné depuis près de quinze ans.", projet: "serenity", projetNom: "Serenity" },
+    { date: "2026-10-29", dateTexte: "29 octobre 2026", source: "L'Agathois", titre: "La résidence Sérénity pose sa première pierre à l'entrée du village naturiste", url: "https://www.lagathois.fr/articles/52844/la-residence-serenity-pose-sa-premiere-pierre-a-l-entree-du-village-naturiste", resume: "Pose de la première pierre en présence des promoteurs, de la Ville d'Agde et de l'architecte du projet.", projet: "serenity", projetNom: "Serenity" },
+    { date: "2026-05-19", dateTexte: "19 mai 2026", source: "La Lettre M", titre: "Cogedim lance un programme de 61 logements à Marseillan", url: "https://www.lalettrem.fr/actualites/cogedim-lance-un-programme-de-61-logements-marseillan", resume: "La résidence Midéa, 61 logements près du centre de Marseillan, signée Nathalie Guerin." },
+    { date: "2026-04-15", dateTexte: "15 avril 2026", source: "Habitat Perpignan Méditerranée", titre: "Les Voiles d'Or, nouveaux logements au Barcarès", url: "https://www.habitat-pm.fr/les-voiles-dor-42-nouveaux-logements-au-barcares/", resume: "Livraison du premier bâtiment de logements sociaux de la résidence, conçue par ADA.", projet: "les-voiles-dor", projetNom: "Les Voiles d'Or" },
+    { date: "2025-06-13", dateTexte: "13 juin 2025", source: "Occitanie Tribune", titre: "La Palmeraie à Marseillan, inauguration d'un havre écologique et social sur l'ancien stade", url: "https://www.occitanie-tribune.com/articles/52856/marseillan-la-palmeraie-a-marseillan-inauguration-d-un-havre-ecologique-et-social-sur-l-ancien-stade", resume: "Inauguration de 46 villas et 18 appartements, et retour sur le travail de l'architecte.", projet: "la-palmeraie", projetNom: "La Palmeraie" },
+    { date: "2021-09-15", dateTexte: "15 septembre 2021", source: "Explore", titre: "Le projet du mois, septembre 2021", url: "https://blog.explore.fr/le-projet-du-mois-septembre-2021/", resume: "L'Archipel à Valras-Plage, trois bâtiments face à la mer avec une résidence seniors.", projet: "archipel", projetNom: "Archipel" },
+    { date: "2021-08-07", dateTexte: "7 août 2021", source: "Ville du Barcarès", titre: "Réunion publique, des résidences dans un écrin de verdure", url: "https://www.lebarcares.fr/2021/08/reunion-publique-des-residences-dans-un-ecrin-de-verdure/", resume: "Présentation des Voiles d'Or aux riverains par le maire, l'architecte et le promoteur.", projet: "les-voiles-dor", projetNom: "Les Voiles d'Or" },
+    { date: "2021-02-01", dateTexte: "Février 2021", source: "RBC Mobilier", titre: "AĒKO, Montpellier", url: "https://rbcmobilier.com/realisations/aeko/", resume: "Les bureaux du promoteur AĒKO dans un appartement ancien de l'Écusson, réaménagés par Nathalie Guerin." },
+    { date: "2011-12-01", dateTexte: "2011", source: "Chrispics", titre: "Chantier de la résidence Capao Juvénal", url: "https://www.chrispics.fr/chresidencelecapao.php", resume: "Immeuble de 20 logements et un commerce, avenue du Pont Juvénal à Montpellier." }
+  ]
+}
+---
+{#- Page Presse : articles et publications qui citent Nathalie Guerin ou ADA.
+    Hors menu, accessible par le lien « Presse » du pied de page. Articles vérifiés le 17 novembre 2026.
+    Les résumés sont rédigés par nous, sans reprise du texte des articles. -#}
+{% include "composants/menu-principal.njk" %}
+<section class="contact-section presse">
+  <h1 class="heading-14">PRESSE</h1>
+  <div class="div-block-13"></div>
+  <p class="presse-intro">Les projets de Nathalie Guerin et de l'agence ADA dans la presse et chez nos partenaires.</p>
+  <ol class="presse-liste">
+    {% for a in articles %}
+    <li class="presse-article">
+      <div class="presse-meta">
+        <time datetime="{{ a.date }}">{{ a.dateTexte }}</time>
+        <span class="presse-source">{{ a.source }}</span>
+      </div>
+      <div class="presse-corps">
+        <h2><a href="{{ a.url }}" target="_blank" rel="noopener">{{ a.titre }}</a></h2>
+        <p>{{ a.resume }}</p>
+        {% if a.projet %}<a href="/projets/{{ a.projet }}" class="presse-projet">Voir le projet {{ a.projetNom }}</a>{% endif %}
+      </div>
+    </li>
+    {% endfor %}
+  </ol>
+</section>
+<div class="div-margin"></div>
+{% include "composants/pied-de-page-statique.njk" %}

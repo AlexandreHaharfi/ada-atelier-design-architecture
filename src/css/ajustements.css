@@ -484,5 +484,66 @@ body > .footer-bottom-contact-static, body > .section-footer { margin-top: auto;
 
 /* Lien « Mentions légales » de la barre du bas, dans le prolongement du copyright. */
 .pied-separateur { margin: 0 .7em; opacity: .5; }
-.pied-lien { color: inherit; text-decoration: none; }
+.pied-lien { color: inherit; text-decoration: none; white-space: nowrap; }
 .pied-lien:hover { color: #fff; text-decoration: underline; text-underline-offset: 2px; }
+
+/* ---------- Page Presse (17 novembre 2026) ----------
+   Hors menu, lien discret dans la barre du bas. Liste d'articles séparés par un filet :
+   date et source à gauche en petites capitales, titre, résumé et lien vers le projet à droite. */
+.page-presse { display: flex; flex-direction: column; min-height: 100vh; background-color: #fff; }
+.presse { max-width: 1000px; margin-top: calc(var(--menu-h) + 56px); font-family: Lato, sans-serif; color: #333; }
+.presse-intro { max-width: 640px; margin: 0 0 32px; font-size: 18px; line-height: 28px; font-weight: 300; color: #555; }
+.presse-liste { margin: 0; padding: 0; list-style: none; border-top: 1px solid #0000002b; }
+.presse-article { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 32px; padding: 28px 0; border-bottom: 1px solid #0000002b; }
+.presse-meta { display: flex; flex-direction: column; gap: 4px; font-size: 13px; line-height: 20px; letter-spacing: .12em; text-transform: uppercase; color: #777; }
+.presse-source { color: #111; font-weight: 700; }
+.presse-corps h2 { margin: 0 0 8px; font-family: Lato, sans-serif; font-size: 21px; line-height: 30px; font-weight: 400; color: #111; text-wrap: balance; }
+.presse-corps h2 a { color: inherit; text-decoration: none; background-image: linear-gradient(currentColor, currentColor); background-size: 0 1px; background-position: 0 100%; background-repeat: no-repeat; transition: background-size .3s; }
+.presse-corps h2 a:hover, .presse-corps h2 a:focus-visible { background-size: 100% 1px; }
+.presse-corps p { max-width: 640px; margin: 0; font-size: 16px; line-height: 26px; color: #555; }
+.presse-projet { display: inline-block; margin-top: 12px; padding: 4px 0; border-bottom: 1px solid #0000004d; font-size: 13px; line-height: 20px; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; color: #333; transition: color .2s, border-color .2s; }
+.presse-projet:hover { color: #000; border-bottom-color: #000; }
+@media (max-width: 767px) {
+  .presse { margin-top: calc(var(--menu-h) + 40px); }
+  .presse-article { grid-template-columns: minmax(0, 1fr); gap: 10px; padding: 22px 0; }
+  .presse-meta { flex-direction: row; flex-wrap: wrap; gap: 4px 12px; }
+  .presse-corps h2 { font-size: 19px; line-height: 27px; }
+}
+@media (min-width: 1440px) {
+  .presse { max-width: calc(1000 * var(--u)); margin-top: calc(var(--menu-h) + 56 * var(--u)); }
+  .presse-intro { max-width: calc(640 * var(--u)); margin-bottom: calc(32 * var(--u)); font-size: calc(18 * var(--u)); line-height: calc(28 * var(--u)); }
+  .presse-article { grid-template-columns: calc(220 * var(--u)) minmax(0, 1fr); gap: calc(32 * var(--u)); padding: calc(28 * var(--u)) 0; }
+  .presse-meta { font-size: calc(13 * var(--u)); line-height: calc(20 * var(--u)); }
+  .presse-corps h2 { margin-bottom: calc(8 * var(--u)); font-size: calc(21 * var(--u)); line-height: calc(30 * var(--u)); }
+  .presse-corps p { max-width: calc(640 * var(--u)); font-size: calc(16 * var(--u)); line-height: calc(26 * var(--u)); }
+  .presse-projet { margin-top: calc(12 * var(--u)); font-size: calc(13 * var(--u)); line-height: calc(20 * var(--u)); }
+}
+
+/* ---------- Autres projets, en bas des pages projets (17 novembre 2026) ----------
+   Trois projets de la même catégorie (complétés par les plus récents), image en 4/3, nom et lieu dessous. */
+.autres-projets { padding: 0 var(--marge) 72px; background-color: #f5f5f5; }
+.autres-projets-cadre { max-width: 1100px; margin: 0 auto; padding-top: 48px; border-top: 1px solid #0000002b; }
+.autres-projets h2 { margin: 0 0 24px; font-family: Lato, sans-serif; font-size: 13px; line-height: 20px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #333; }
+.autres-projets-liste { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 0; padding: 0; list-style: none; }
+.autre-projet { display: block; color: #111; text-decoration: none; }
+.autre-projet-image { display: block; aspect-ratio: 4 / 3; max-width: 100%; overflow: hidden; background-color: #ddd; }
+.autre-projet-image img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+.autre-projet:hover .autre-projet-image img { transform: scale(1.04); }
+.autre-projet-nom { display: block; margin-top: 12px; font-family: Lato, sans-serif; font-size: 15px; line-height: 22px; letter-spacing: .06em; text-transform: uppercase; }
+.autre-projet-lieu { display: block; font-family: Lato, sans-serif; font-size: 14px; line-height: 20px; font-weight: 300; color: #666; }
+@media (max-width: 767px) {
+  .autres-projets { padding-bottom: 48px; }
+  .autres-projets-cadre { padding-top: 32px; }
+  .autres-projets-liste { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .autre-projet-nom { font-size: 12px; line-height: 17px; letter-spacing: .04em; }
+  .autre-projet-lieu { font-size: 12px; line-height: 17px; }
+}
+@media (min-width: 1440px) {
+  .autres-projets { padding-bottom: calc(72 * var(--u)); }
+  .autres-projets-cadre { max-width: calc(1100 * var(--u)); padding-top: calc(48 * var(--u)); }
+  .autres-projets h2 { margin-bottom: calc(24 * var(--u)); font-size: calc(13 * var(--u)); line-height: calc(20 * var(--u)); }
+  .autres-projets-liste { gap: calc(24 * var(--u)); }
+  .autre-projet-nom { margin-top: calc(12 * var(--u)); font-size: calc(15 * var(--u)); line-height: calc(22 * var(--u)); }
+  .autre-projet-lieu { font-size: calc(14 * var(--u)); line-height: calc(20 * var(--u)); }
+}
+@media (prefers-reduced-motion: reduce) { .autre-projet-image img, .presse-corps h2 a { transition: none; } }
