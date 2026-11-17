@@ -6,8 +6,9 @@
   "@type": "ProfessionalService",
   "@id": "{{ site.domaine }}/#agence",
   "name": "{{ site.nom | safe }}",
-  "alternateName": "ADA",
-  "description": "Agence d'architecture de Nathalie Guérin, architecte DPLG, à Lattes (Hérault) : {% for c in categories %}{{ c.type | lower | safe }}{% if not loop.last %}, {% endif %}{% endfor %}.",
+  "alternateName": ["ADA Architecture", "ADA"],
+  "areaServed": ["Montpellier", "Hérault", "Occitanie", "France"],
+  "description": "Agence d'architecture de Nathalie Guerin, architecte DPLG, à Montpellier (Hérault) : {% for c in categories %}{{ c.type | lower | safe }}{% if not loop.last %}, {% endif %}{% endfor %}.",
   "url": "{{ site.domaine }}/",
   "logo": "{{ site.domaine }}/images/site/6727cf5bdd9b588ebe6b0f92_ada-favicon-256x256.png",
   "image": "{{ site.domaine }}{{ site.imagePartage }}",
@@ -25,7 +26,7 @@
   "founder": {
     "@type": "Person",
     "@id": "{{ site.domaine }}/nathalie-guerin#nathalie-guerin",
-    "name": "Nathalie Guérin",
+    "name": "Nathalie Guerin",
     "jobTitle": "Architecte DPLG",
     "url": "{{ site.domaine }}/nathalie-guerin"
   }

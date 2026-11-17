@@ -87,9 +87,9 @@
     <div role="listitem" class="collection-item-3 w-dyn-item w-dyn-repeater-item w-col w-col-2">
       <a href="#" class="lightbox-link w-inline-block w-lightbox">
         {% if variantes %}
-        <img src="{{ photo }}" loading="lazy" alt="{{ projet.nom }}{% if projet.localisation %}, {{ projet.localisation }}{% endif %} – photo {{ loop.index }}" sizes="130px" srcset="{{ variantes }}" class="image-7">
+        <img src="{{ photo }}" loading="lazy" alt="{{ projet.nom }}{% if projet.localisation %}, {{ projet.localisation }}{% endif %} - photo {{ loop.index }}" sizes="130px" srcset="{{ variantes }}" class="image-7">
         {% else %}
-        <img src="{{ photo }}" loading="lazy" alt="{{ projet.nom }}{% if projet.localisation %}, {{ projet.localisation }}{% endif %} – photo {{ loop.index }}" class="image-7">
+        <img src="{{ photo }}" loading="lazy" alt="{{ projet.nom }}{% if projet.localisation %}, {{ projet.localisation }}{% endif %} - photo {{ loop.index }}" class="image-7">
         {% endif %}
         <script type="application/json" class="w-json">{{ photo | lightbox("Projets") | safe }}</script>
       </a>
